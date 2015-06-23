@@ -16,6 +16,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
 
     var audioPlayer : AVAudioPlayer?
     var audioRecorder : AVAudioRecorder?
+    
+    var baseRecordButtonSizeRad : CGFloat = 100;
 
     var meterTimer:NSTimer!
     
@@ -36,13 +38,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     func setupUI(){
         
         //record button
-        let buttonWidth : CGFloat! = 50
-        let buttonHeight : CGFloat! = 50
+        let buttonWidth : CGFloat! = baseRecordButtonSizeRad
+        let buttonHeight : CGFloat! = baseRecordButtonSizeRad
         
         recordButton = UIButton(frame: CGRectMake(self.view.frame.width/2 - buttonWidth/2,
             self.view.frame.height/2 - buttonHeight/2,
             buttonWidth,
             buttonHeight))
+        recordButton.layer.cornerRadius = buttonWidth/2;
         
         recordButton.backgroundColor = UIColor.orangeColor()
         
@@ -91,7 +94,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     func recordAudio(){
         if audioRecorder?.recording == false{
             audioRecorder?.record()
-            self.meterTimer = NSTimer.scheduledTimerWithTimeInterval(0.1,
+            self.meterTimer = NSTimer.scheduledTimerWithTimeInterval(0.01,
                 target:self,
                 selector:"updateAudioMeter:",
                 userInfo:nil,
@@ -160,9 +163,23 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             let s = "\(String(format: dFormat, min)):\(String(format: dFormat, sec) )"
             audioRecorder!.updateMeters()
             var apc0 = audioRecorder!.averagePowerForChannel(0)
-//            var peak0 = audioRecorder!.peakPowerForChannel(0)
             
-            println( logMap(apc0, inMin: -100.0, inMax: -3.0, outMin: 0.0001, outMax: 1) )
+            //println( logMap(apc0, inMin: -100.0, inMax: -3.0, outMin: 0.0001, outMax: 1) )
+            
+            var level = logMap(apc0, inMin: -100.0, inMax: -3.0, outMin: 0.0001, outMax: 1)
+            
+            var scale = 500.0
+    
+            var newButtonRad = Float(baseRecordButtonSizeRad) + Float(level) * Float(scale)
+            
+            
+            recordButton.frame = CGRectMake(
+                CGFloat(Float(self.view.frame.width/2) - Float(recordButton.bounds.width)/2),
+                CGFloat(Float(self.view.frame.height/2) - Float(recordButton.bounds.height)/2),
+                CGFloat(newButtonRad),
+                CGFloat(newButtonRad))
+            
+            recordButton.layer.cornerRadius = recordButton.bounds.width/2
         }
     }
 
