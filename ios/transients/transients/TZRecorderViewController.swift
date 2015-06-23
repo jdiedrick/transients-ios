@@ -9,12 +9,15 @@
 import UIKit
 import AVFoundation
 
-var recordButton = UIButton()
 
 class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
 
+    var recordButton = UIButton()
+
     var audioPlayer : AVAudioPlayer?
     var audioRecorder : AVAudioRecorder?
+
+    var meterTimer:NSTimer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +70,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         var error: NSError?
         
         let audioSession = AVAudioSession.sharedInstance()
-        audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, error: &error)
+        audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker, error: &error)
         
         
         if let err = error{
@@ -80,6 +83,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         if let err = error{
             println("audioSession error: \(err.localizedDescription)")
         } else{
+            audioRecorder?.meteringEnabled = true
             audioRecorder?.prepareToRecord()
         }
     }
@@ -87,6 +91,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     func recordAudio(){
         if audioRecorder?.recording == false{
             audioRecorder?.record()
+            self.meterTimer = NSTimer.scheduledTimerWithTimeInterval(0.1,
+                target:self,
+                selector:"updateAudioMeter:",
+                userInfo:nil,
+                repeats:true)
         }
     }
     
@@ -142,5 +151,40 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         playAudio()
     }
 
+    
+    func updateAudioMeter(time:NSTimer){
+        if (audioRecorder?.recording == true) {
+            let dFormat = "%02d"
+            let min:Int = Int(audioRecorder!.currentTime / 60)
+            let sec:Int = Int(audioRecorder!.currentTime % 60)
+            let s = "\(String(format: dFormat, min)):\(String(format: dFormat, sec) )"
+            audioRecorder!.updateMeters()
+            var apc0 = audioRecorder!.averagePowerForChannel(0)
+//            var peak0 = audioRecorder!.peakPowerForChannel(0)
+            
+            println( logMap(apc0, inMin: -100.0, inMax: -3.0, outMin: 0.0001, outMax: 1) )
+        }
+    }
+
+
+    /* HELPERS */
+    func logMap(inVal:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float)  -> Float{
+        var minv = logf(outMin)
+        var maxv = logf(outMax)
+        
+        var numerator = maxv - minv
+        var denom = inMax - inMin
+        
+        // dont divide by zero
+        if (denom == 0.0) {
+            denom = 0.00000000001
+        }
+        
+        // calculate scale
+        var scale = numerator / denom
+        
+        return exp( (minv + scale * (inVal-inMin) ))
+    }
+    
 }
 
