@@ -14,6 +14,7 @@
 		8ED07D001B38DAC100C1F950 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ED07CFF1B38DAC100C1F950 /* Images.xcassets */; };
 		8ED07D031B38DAC100C1F950 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED07D011B38DAC100C1F950 /* LaunchScreen.xib */; };
 		8ED07D0F1B38DAC100C1F950 /* transientsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07D0E1B38DAC100C1F950 /* transientsTests.swift */; };
+		8EE840231B3C78EF0037EC64 /* TZMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		8ED07D081B38DAC100C1F950 /* transientsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = transientsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED07D0D1B38DAC100C1F950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ED07D0E1B38DAC100C1F950 /* transientsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transientsTests.swift; sourceTree = "<group>"; };
+		8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZMapViewController.swift; sourceTree = "<group>"; };
 		F1F1F2E4BE99EA7D0F555FA8 /* Pods-transients.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transients.debug.xcconfig"; path = "Pods/Target Support Files/Pods-transients/Pods-transients.debug.xcconfig"; sourceTree = "<group>"; };
 		F22EA1881006184062FB1506 /* Pods-transients.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transients.release.xcconfig"; path = "Pods/Target Support Files/Pods-transients/Pods-transients.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 			children = (
 				8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */,
 				8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */,
+				8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */,
 				8ED07CFF1B38DAC100C1F950 /* Images.xcassets */,
 				8ED07D011B38DAC100C1F950 /* LaunchScreen.xib */,
 				8ED07CF71B38DAC100C1F950 /* transients.xcdatamodeld */,
@@ -289,6 +292,7 @@
 				8ED07CFB1B38DAC100C1F950 /* TZRecorderViewController.swift in Sources */,
 				8ED07CF91B38DAC100C1F950 /* transients.xcdatamodeld in Sources */,
 				8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */,
+				8EE840231B3C78EF0037EC64 /* TZMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
