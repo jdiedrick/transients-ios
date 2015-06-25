@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,13 +17,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        if let window = window {
-            window.backgroundColor = UIColor.whiteColor()
-            window.rootViewController = ViewController()
-            window.makeKeyAndVisible()
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        if let window = window{
+        let tabBarController = UITabBarController()
+        let rvc = TZRecorderViewController(nibName: nil, bundle: nil)
+        let mvc = TZMapViewController(nibName: nil, bundle: nil)
+        let controllers = [rvc, mvc]
+        
+        tabBarController.viewControllers = controllers
+        
+        window.rootViewController = tabBarController
+        
+        rvc.tabBarItem = UITabBarItem(title: "Record", image: nil, tag: 1)
+        mvc.tabBarItem = UITabBarItem(title: "Map", image: nil, tag: 2)
+        
+        window.makeKeyAndVisible()
         }
+       
         return true
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {

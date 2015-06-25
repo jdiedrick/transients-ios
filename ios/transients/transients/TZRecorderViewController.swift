@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 
-class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
 
     var recordButton = UIButton()
 
