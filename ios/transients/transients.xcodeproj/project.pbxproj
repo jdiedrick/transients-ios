@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8689DFE0401127FC6435AADB /* Pods_transients.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8E486BCB1B3E467E00CE41A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E486BCA1B3E467E00CE41A4 /* MapKit.framework */; };
 		8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */; };
 		8ED07CF91B38DAC100C1F950 /* transients.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF71B38DAC100C1F950 /* transients.xcdatamodeld */; };
 		8ED07CFB1B38DAC100C1F950 /* TZRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_transients.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E486BCA1B3E467E00CE41A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8ED07CF01B38DAC100C1F950 /* transients.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transients.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED07CF41B38DAC100C1F950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E486BCB1B3E467E00CE41A4 /* MapKit.framework in Frameworks */,
 				8689DFE0401127FC6435AADB /* Pods_transients.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +73,7 @@
 		2CB6CB170D55CA1433A0A071 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E486BCA1B3E467E00CE41A4 /* MapKit.framework */,
 				7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */,
 			);
 			name = Frameworks;
