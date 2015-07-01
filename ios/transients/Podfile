@@ -6,6 +6,7 @@ use_frameworks!
 
 target 'transients' do
 	pod 'Alamofire'
+  pod 'SwiftyJSON', '~> 2.2.0'
 end
 
 target 'transientsTests' do

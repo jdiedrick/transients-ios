@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 class TZMapViewController : UIViewController, CLLocationManagerDelegate{
     
@@ -17,7 +19,7 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
     let locationManager = CLLocationManager()
 
     var mapScale = 0.25
-
+    var myLocation : CLLocationCoordinate2D!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +37,13 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
         // only request location when app is open
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+
+        self.getSounds()
     }
 
 
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-//        println("\(manager.location.coordinate)")
-
+        self.myLocation = manager.location.coordinate
         self.centerMapView(manager.location.coordinate)
 
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, err)->Void in
@@ -95,5 +98,33 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
 
     func mapViewChanged() {
         // to do: reload pins based on the new map view
+    }
+
+
+    func getSounds() {
+        Alamofire.request(.GET, "http://localhost:9000/geosounds")
+            .responseJSON { (_, _, data, _) in
+                let json = JSON(data!)
+
+                self.plotSounds(json)
+        }
+    }
+
+    func plotSounds(data:JSON) {
+        
+        for (index: String, sound: JSON) in data["geosounds"] {
+            var lat = sound["lat"].double
+            var lng = sound["lng"].double
+
+            var coord = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat!), longitude: CLLocationDegrees(lng!))
+
+            let pin = MKPointAnnotation()
+            pin.coordinate = coord
+            pin.title = "Cool Place and Sound"
+            mapView.addAnnotation(pin)
+
+            println("Lat: \(lat), Lng: \(lng)" )
+        }
+
     }
 }
