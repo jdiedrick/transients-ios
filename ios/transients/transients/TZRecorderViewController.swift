@@ -14,9 +14,9 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
 
     var recordButton = UIButton()
 
-    var geoSoundRecorder : TZGeoSoundRecorder?
+    var geoSoundRecorder : TZGeoSoundRecorder!
     
-    var geoSoundPlayer : TZGeoSoundPlayer?
+    var geoSoundPlayer : TZGeoSoundPlayer!
     
     var baseRecordButtonSizeRad : CGFloat = 100;
 
@@ -88,16 +88,27 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         var error: NSError?
         
         let audioSession = AVAudioSession.sharedInstance()
-        audioSession.setCategory(
-            AVAudioSessionCategoryPlayAndRecord,
-            withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker,
-            error: &error)
         
         
         if let err = error{
             println("audioSession error: \(err.localizedDescription)")
         }
         
+        if (audioSession.respondsToSelector("requestRecordPermission:")) {
+            AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
+                if granted {
+                    println("granted")
+                    audioSession.setCategory(
+                        AVAudioSessionCategoryPlayAndRecord,
+                        withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker,
+                        error: &error)
+                } else{
+                    println("not granted")
+                }
+            })
+            
+        }
+
         // setup our recorder and player
         
         geoSoundRecorder = TZGeoSoundRecorder(
@@ -136,7 +147,6 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     func stopRecording(sender:UIButton!){
         println("stop recording")
         geoSoundRecorder!.stopRecordingAudio()
-        geoSoundPlayer!.startPlayingAudio()
     }
 
     // delegates
@@ -151,6 +161,18 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
         println("audio recorder did finish recording")
+        var bufferURL = geoSoundRecorder.url
+        var error: NSError?
+
+        geoSoundPlayer = TZGeoSoundPlayer(contentsOfURL: bufferURL, error: &error)
+
+        if let error = error {
+            println("error playing back recording")
+        } else {
+            geoSoundPlayer!.startPlayingAudio()
+        }
+        
+        println("Player duration: \(geoSoundPlayer.duration)")
     }
     
     func audioRecorderEncodeErrorDidOccur(recorder: AVAudioRecorder!, error: NSError!) {
