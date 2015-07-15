@@ -58,7 +58,7 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate, MKMapVi
                 if granted {
                     println("granted")
                     audioSession.setCategory(
-                        AVAudioSessionCategoryPlayback,
+                        AVAudioSessionCategoryPlayAndRecord,
                         withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker,
                         error: &error)
                 } else{
