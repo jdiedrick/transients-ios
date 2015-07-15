@@ -181,7 +181,17 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate, MKMapVi
     //delegates
     
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-       
+      
+        if (geosoundPlayer != nil){
+        
+                println("pausing, removing observer and clearing audio player")
+            
+                geosoundPlayer.pause() // pause the audio
+            
+                geosoundPlayer.removeObserver(self, forKeyPath: "status") // clear the observer
+            
+                geosoundPlayer = nil // clear the player
+        }
         //use av player instead of avaudioplayer, maybe change in class for all players?
         var error : NSError?
       
