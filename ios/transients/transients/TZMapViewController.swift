@@ -13,6 +13,8 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
+let json_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/geosounds"
+
 class TZMapViewController : UIViewController, CLLocationManagerDelegate{
     
     let mapView = MKMapView()
@@ -101,7 +103,7 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
 
 
     func getSounds() {
-        Alamofire.request(.GET, "http://localhost:9000/geosounds")
+        Alamofire.request(.GET, json_url)
             .responseJSON { (_, _, data, _) in
                 
                 if ((data) != nil){
@@ -115,10 +117,14 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
     func plotSounds(data:JSON) {
         
         for (index: String, sound: JSON) in data["geosounds"] {
-            var lat = sound["lat"].double
-            var lng = sound["lng"].double
+            
+            println(sound)
+           
+            println(sound["latitude"])
+            var lat = sound["latitude"]
+            var lng = sound["longitude"]
 
-            var coord = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat!), longitude: CLLocationDegrees(lng!))
+            var coord = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat.numberValue), longitude: CLLocationDegrees(lng.numberValue))
 
             let pin = MKPointAnnotation()
             pin.coordinate = coord

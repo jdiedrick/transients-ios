@@ -199,12 +199,6 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         dateFormatter.dateFormat = "MM-dd-yyyy"
         var DateInFormat:String = dateFormatter.stringFromDate(todaysDate)
        
-        /*
-        for (index: String, sound: JSON) in data["geosounds"] {
-            var lat = sound["lat"].double
-            var lng = sound["lng"].double
-        */
-        
         var sound_url = jsonData["filename"].string
         
         var newPost = ["latitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.latitude)",
