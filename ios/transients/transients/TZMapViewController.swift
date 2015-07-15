@@ -26,18 +26,17 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
 
         // Do any additional setup after loading the view, typically from a nib.
         view.backgroundColor = UIColor.purpleColor()
-        
+       
         mapView.showsUserLocation = true
 
         self.view.addSubview(mapView)
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
+       
         // only request location when app is open
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
-
         self.getSounds()
     }
 
@@ -104,9 +103,12 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
     func getSounds() {
         Alamofire.request(.GET, "http://localhost:9000/geosounds")
             .responseJSON { (_, _, data, _) in
+                
+                if ((data) != nil){
                 let json = JSON(data!)
 
                 self.plotSounds(json)
+                }
         }
     }
 

@@ -6,8 +6,12 @@
 //  Copyright (c) 2015 Johann Diedrick. All rights reserved.
 //
 
+let api_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
+
 import UIKit
 import AVFoundation
+import Alamofire
+import SwiftyJSON
 
 
 class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
@@ -28,6 +32,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             view.backgroundColor = UIColor.blueColor()
         setupUI()
         setupAudio()
+        LocationService.sharedInstance.startUpdatingLocation()
         
     }
 
@@ -147,8 +152,68 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     func stopRecording(sender:UIButton!){
         println("stop recording")
         geoSoundRecorder!.stopRecordingAudio()
+        
+        //start uploading
+        self.uploadAudio()
     }
 
+    func uploadAudio(){
+       
+        //attempting to upload audio
+        println("uploading audio")
+       
+        
+        let fileURL = geoSoundRecorder.url
+        
+        Alamofire.upload(
+            Alamofire.Method.POST,
+            URLString: api_url,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: fileURL, name: "wav")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { request, response, json, error in
+                        println(json)
+                        //let json_data = JSON(JSON as? AnyObject)
+                        var json_data = JSON(json!)
+                        self.uploadJSON(json_data)
+                    }
+                case .Failure(let encodingError):
+                    println(encodingError)
+                }
+            }
+        )
+    
+    }
+    
+    func uploadJSON(jsonData: JSON ){
+       //upload json
+        println("uploading json")
+        println("\(LocationService.sharedInstance.currentLocation)")
+       
+        var todaysDate:NSDate = NSDate()
+        var dateFormatter:NSDateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        var DateInFormat:String = dateFormatter.stringFromDate(todaysDate)
+       
+        /*
+        for (index: String, sound: JSON) in data["geosounds"] {
+            var lat = sound["lat"].double
+            var lng = sound["lng"].double
+        */
+        
+        var sound_url = jsonData["filename"].string
+        
+        var newPost = ["latitude": "\(LocationService.sharedInstance.currentLocation?.coordinate.latitude)",
+            "longitude": "\(LocationService.sharedInstance.currentLocation?.coordinate.longitude)",
+            "filename": sound_url!];
+
+        Alamofire.request(Alamofire.Method.POST, "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson", parameters: newPost, encoding: .JSON)
+    
+
+    }
     // delegates
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
