@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 Johann Diedrick. All rights reserved.
 //
 
-let api_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
+let audio_upload_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
+let json_upload_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
 
 import UIKit
 import AVFoundation
@@ -167,7 +168,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         
         Alamofire.upload(
             Alamofire.Method.POST,
-            URLString: api_url,
+            URLString: audio_upload_url,
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(fileURL: fileURL, name: "wav")
             },
@@ -206,11 +207,11 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         
         var sound_url = jsonData["filename"].string
         
-        var newPost = ["latitude": "\(LocationService.sharedInstance.currentLocation?.coordinate.latitude)",
-            "longitude": "\(LocationService.sharedInstance.currentLocation?.coordinate.longitude)",
+        var newPost = ["latitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.latitude)",
+            "longitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.longitude)",
             "filename": sound_url!];
 
-        Alamofire.request(Alamofire.Method.POST, "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson", parameters: newPost, encoding: .JSON)
+        Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: newPost, encoding: .JSON)
     
 
     }
