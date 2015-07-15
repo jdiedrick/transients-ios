@@ -12,17 +12,20 @@ import MapKit
 import CoreLocation
 import Alamofire
 import SwiftyJSON
+import AVFoundation
 
 let json_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/geosounds"
 
-class TZMapViewController : UIViewController, CLLocationManagerDelegate{
+class TZMapViewController : UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, AVAudioPlayerDelegate{
     
     let mapView = MKMapView()
     let locationManager = CLLocationManager()
 
     var mapScale = 0.25
     var myLocation : CLLocationCoordinate2D!
-
+    
+    var geosoundPlayer : AVPlayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +33,7 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
         view.backgroundColor = UIColor.purpleColor()
        
         mapView.showsUserLocation = true
+        mapView.delegate = self
 
         self.view.addSubview(mapView)
         
@@ -40,6 +44,42 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.getSounds()
+       
+        var error : NSError?
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        
+        if let err = error{
+            println("audioSession error: \(err.localizedDescription)")
+        }
+        if (audioSession.respondsToSelector("requestRecordPermission:")) {
+            AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
+                if granted {
+                    println("granted")
+                    audioSession.setCategory(
+                        AVAudioSessionCategoryPlayback,
+                        withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker,
+                        error: &error)
+                } else{
+                    println("not granted")
+                }
+            })
+            
+        }
+
+        // setup our recorder and player
+       /*
+        geoSoundPlayer = TZGeoSoundPlayer(
+            contentsOfURL: soundFileURL,
+            error: &error)
+        
+        geoSoundPlayer?.delegate = self
+        geoSoundRecorder?.delegate = self
+      */
+        
+        
+    
     }
 
 
@@ -123,16 +163,46 @@ class TZMapViewController : UIViewController, CLLocationManagerDelegate{
             println(sound["latitude"])
             var lat = sound["latitude"]
             var lng = sound["longitude"]
+            var sound_url = sound["sound_url"]
 
             var coord = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat.numberValue), longitude: CLLocationDegrees(lng.numberValue))
 
             let pin = MKPointAnnotation()
             pin.coordinate = coord
             pin.title = "Cool Place and Sound"
+            pin.subtitle = sound_url.stringValue
             mapView.addAnnotation(pin)
 
-            println("Lat: \(lat), Lng: \(lng)" )
+            println("Lat: \(lat), Lng: \(lng), URL: \(sound_url)" )
         }
 
     }
+
+    //delegates
+    
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+       
+        //use av player instead of avaudioplayer, maybe change in class for all players?
+        var error : NSError?
+      
+        var soundFileURL = NSURL(string: view.annotation.subtitle as String!)!
+        
+        println("\(soundFileURL)")
+        geosoundPlayer = AVPlayer(URL: soundFileURL)
+        
+       //setup notifications
+        geosoundPlayer.addObserver(self, forKeyPath: "status", options: nil, context: nil)
+        
+    }
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<()>) {
+        if keyPath == "status" {
+            if geosoundPlayer.status == AVPlayerStatus.ReadyToPlay{
+                println("ready to play")
+                geosoundPlayer.play()
+            }
+        }
+    }
+    
+    
 }
