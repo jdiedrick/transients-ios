@@ -8,6 +8,7 @@ target 'transients' do
 	#pod 'Alamofire', '~> 1.2.3'
 	pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
 	pod 'SwiftyJSON', '~> 2.2.0'
+	pod 'MotionKit'
 end
 
 target 'transientsTests' do

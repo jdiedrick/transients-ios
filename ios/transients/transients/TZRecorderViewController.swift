@@ -60,6 +60,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         recordButton.addTarget(self, action: "stopRecording:", forControlEvents: UIControlEvents.TouchUpInside)
         
         self.view.addSubview(recordButton)
+       
         
         }
     
