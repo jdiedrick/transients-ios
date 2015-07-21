@@ -18,6 +18,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     var locationManager:CLLocationManager?
     var currentLocation:CLLocation?
     var driver_id:String?
+    var currentHeading:CLHeading?
     
     override init() {
         super.init()
@@ -36,6 +37,16 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     func stopUpdatingLocation() {
         println("Stop Location Updates")
         self.locationManager?.stopUpdatingLocation()
+    }
+    
+    func startUpdatingHeading(){
+        println("Starting Heading Updates")
+        self.locationManager?.startUpdatingHeading()
+    }
+    
+    func stopUpdatingHeading(){
+        println("Stop Heading Updates")
+        self.locationManager?.stopUpdatingHeading()
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -58,4 +69,10 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         let lat = currentLocation.coordinate.latitude
         let lon = currentLocation.coordinate.longitude
     }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
+        self.currentHeading = newHeading
+    }
+    
+    
 }

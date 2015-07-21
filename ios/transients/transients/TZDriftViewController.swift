@@ -19,8 +19,15 @@ let interval = 0.1
 
 override func viewDidLoad(){
     view.backgroundColor = UIColor.orangeColor()
+   
+    
+    LocationService.sharedInstance.startUpdatingLocation()
+    LocationService.sharedInstance.startUpdatingHeading()
+    
     
     var motionValues = NSMutableArray()
+   
+    
     
     motionKit.getAccelerometerValues(interval: self.interval) {(x, y, z) -> () in
     
@@ -40,9 +47,14 @@ override func viewDidLoad(){
               //  println("last value: \(lastValue) | penultimateValue: \(penultimateValue)")
                 if slowedDown == false{
                     if (lastValue > penultimateValue){
-                        println("we're slowing down: max value above threshold: \(abs(penultimateValue) - self.threshold)")
+                        
+                        var throwDistance = abs(penultimateValue) - self.threshold
+                        println("we're slowing down: max value above threshold: \(throwDistance)")
+                        
                         slowedDown = true
                         motionValues.removeAllObjects()
+                        
+                        self.calculateNewPosition(throwDistance)
                     }
                 }
             }
@@ -53,5 +65,24 @@ override func viewDidLoad(){
     
     }
 }
-
+    
+    func calculateNewPosition(throwDistance : Double){
+        var distance = 2*throwDistance //first calculate magnitude (distance); might wanna use a map function?
+        var currentLat = LocationService.sharedInstance.currentLocation!.coordinate.latitude
+        var currentLng = LocationService.sharedInstance.currentLocation!.coordinate.longitude
+        var heading = LocationService.sharedInstance.currentHeading!.magneticHeading
+        var latDisplacement = distance*cos(self.DegreesToRadians(heading))
+        var lngDisplacement = distance*sin(self.DegreesToRadians(heading))
+        var newLat = currentLat + latDisplacement
+        var newLng = currentLng + lngDisplacement
+        
+        println("Distance: \(distance) | Current Lat: \(currentLat) | Current Lng: \(currentLng) | Heading: \(heading) | latDisp: \(latDisplacement) | lngDisp: \(lngDisplacement) | New Lat: \(newLat) | New Lng: \(newLng) ")
+        
+        
+    }
+    
+    func DegreesToRadians (value:Double) -> Double {
+        return value * M_PI / 180.0
+    }
+    
 }
