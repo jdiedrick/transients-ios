@@ -16,6 +16,7 @@ let motionKit = MotionKit()
     
 let threshold = 0.5
 let interval = 0.1
+let magnitude = 5
 
 override func viewDidLoad(){
     view.backgroundColor = UIColor.orangeColor()
@@ -67,7 +68,7 @@ override func viewDidLoad(){
 }
     
     func calculateNewPosition(throwDistance : Double){
-        var distance = 2*throwDistance //first calculate magnitude (distance); might wanna use a map function?
+        var distance = 3.0*throwDistance //first calculate magnitude (distance); might wanna use a map function?
         var currentLat = LocationService.sharedInstance.currentLocation!.coordinate.latitude
         var currentLng = LocationService.sharedInstance.currentLocation!.coordinate.longitude
         var heading = LocationService.sharedInstance.currentHeading!.magneticHeading
