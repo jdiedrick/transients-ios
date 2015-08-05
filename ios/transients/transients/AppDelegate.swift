@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let window = window{
         
-        /*
         let tabBarController = UITabBarController()
         let rvc = TZRecorderViewController(nibName: nil, bundle: nil)
         let mvc = TZMapViewController(nibName: nil, bundle: nil)
@@ -35,11 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         rvc.tabBarItem = UITabBarItem(title: "Record", image: nil, tag: 1)
         mvc.tabBarItem = UITabBarItem(title: "Map", image: nil, tag: 2)
-        */
         
         //these two lines are used to custom make tzdriftviewcontroller load first for testing
-        let rootViewController : UIViewController = TZDriftViewController()
-        window.rootViewController = rootViewController
+//        let rootViewController : UIViewController = TZDriftViewController()
+//        window.rootViewController = rootViewController
         
         window.makeKeyAndVisible()
         }

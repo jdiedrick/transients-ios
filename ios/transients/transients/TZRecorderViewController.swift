@@ -156,7 +156,8 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         geoSoundRecorder!.stopRecordingAudio()
         
         //start uploading
-        self.uploadAudio()
+        println("transitioning")
+        //        self.uploadAudio()
     }
 
     func uploadAudio(){
@@ -210,6 +211,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     
 
     }
+
     // delegates
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
@@ -230,7 +232,16 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         if let error = error {
             println("error playing back recording")
         } else {
-            geoSoundPlayer!.startPlayingAudio()
+
+            // transition screens
+            let tzsvc:TZSaveViewController = TZSaveViewController()
+
+            tzsvc.file_path = bufferURL
+
+            self.presentViewController(tzsvc, animated: true, completion: nil)
+            
+
+            //            geoSoundPlayer!.startPlayingAudio()
         }
         
         println("Player duration: \(geoSoundPlayer.duration)")
