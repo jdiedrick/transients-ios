@@ -11,10 +11,13 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-let audio_upload_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
-let json_upload_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
+let audio_upload_url_local = "http://192.168.0.13:9000/uploadaudio"
+let json_upload_url_local = "http://192.168.0.13:9000/uploadjson"
 
-class TZSaveViewController: UIViewController{
+let audio_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
+let json_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
+
+class TZSaveViewController: UIViewController, UITextFieldDelegate{
     
     
     /**
@@ -26,6 +29,9 @@ class TZSaveViewController: UIViewController{
             - text box: description, tags
             - display time and date
     **/
+
+    var audio_upload_url = audio_upload_url_dev
+    var json_upload_url = json_upload_url_dev
     
     var file_path:NSURL?
     
@@ -50,17 +56,24 @@ class TZSaveViewController: UIViewController{
 
         view.backgroundColor = UIColor.grayColor()
         
+        //gesture for dismissing keyboard
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
         title_box = UITextField()
+        title_box?.delegate = self
         title_box?.setTranslatesAutoresizingMaskIntoConstraints(false)
         title_box?.backgroundColor = UIColor.purpleColor()
         title_box?.placeholder = "Title of Sound (optional)"
         
         description_box = UITextField()
+        description_box?.delegate = self
         description_box?.setTranslatesAutoresizingMaskIntoConstraints(false)
         description_box?.backgroundColor = UIColor.yellowColor()
         description_box?.placeholder = "Description (optional)"
 
         tag_box = UITextField()
+        tag_box?.delegate = self
         tag_box?.setTranslatesAutoresizingMaskIntoConstraints(false)
         tag_box?.backgroundColor = UIColor.yellowColor()
         tag_box?.placeholder = "Tags (optional)"
@@ -95,6 +108,7 @@ class TZSaveViewController: UIViewController{
         cancel_button?.setTranslatesAutoresizingMaskIntoConstraints(false)
         cancel_button?.backgroundColor = UIColor.blueColor()
         cancel_button?.setTitle("Cancel", forState: UIControlState.Normal)
+        cancel_button?.addTarget(self, action: "cancelUpload", forControlEvents: UIControlEvents.TouchUpInside)
         
         drift_switch = UISwitch()
         drift_switch?.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -181,18 +195,39 @@ class TZSaveViewController: UIViewController{
        
         var todaysDate:NSDate = NSDate()
         var dateFormatter:NSDateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy"
-        var DateInFormat:String = dateFormatter.stringFromDate(todaysDate)
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        var date:String = dateFormatter.stringFromDate(todaysDate)
        
         var sound_url = jsonData["filename"].string
         
-        var newPost = ["latitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.latitude)",
+        var newPost = [
+            "latitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.latitude)",
             "longitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.longitude)",
-            "filename": sound_url!];
+            "filename": sound_url!,
+            "date": date,
+            "time": "4:20",
+            "title": title_box!.text,
+            "description": description_box!.text,
+            "tags": tag_box!.text
+        ];
 
         Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: newPost, encoding: .JSON)
-    
 
     }
     
+    func cancelUpload(){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //text view delegate methods
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func DismissKeyboard(){
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
 }
