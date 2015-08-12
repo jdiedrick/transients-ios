@@ -6,13 +6,9 @@
 //  Copyright (c) 2015 Johann Diedrick. All rights reserved.
 //
 
-let audio_upload_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
-let json_upload_url = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
 
 import UIKit
 import AVFoundation
-import Alamofire
-import SwiftyJSON
 
 
 class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
@@ -60,6 +56,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         recordButton.addTarget(self, action: "stopRecording:", forControlEvents: UIControlEvents.TouchUpInside)
         
         self.view.addSubview(recordButton)
+       
         
         }
     
@@ -153,62 +150,10 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     func stopRecording(sender:UIButton!){
         println("stop recording")
         geoSoundRecorder!.stopRecordingAudio()
-        
-        //start uploading
-        self.uploadAudio()
+        println("transitioning")
     }
 
-    func uploadAudio(){
-       
-        //attempting to upload audio
-        println("uploading audio")
-       
-        
-        let fileURL = geoSoundRecorder.url
-        
-        Alamofire.upload(
-            Alamofire.Method.POST,
-            URLString: audio_upload_url,
-            multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: fileURL, name: "wav")
-            },
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseJSON { request, response, json, error in
-                        println(json)
-                        //let json_data = JSON(JSON as? AnyObject)
-                        var json_data = JSON(json!)
-                        self.uploadJSON(json_data)
-                    }
-                case .Failure(let encodingError):
-                    println(encodingError)
-                }
-            }
-        )
-    
-    }
-    
-    func uploadJSON(jsonData: JSON ){
-       //upload json
-        println("uploading json")
-        println("\(LocationService.sharedInstance.currentLocation)")
-       
-        var todaysDate:NSDate = NSDate()
-        var dateFormatter:NSDateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy"
-        var DateInFormat:String = dateFormatter.stringFromDate(todaysDate)
-       
-        var sound_url = jsonData["filename"].string
-        
-        var newPost = ["latitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.latitude)",
-            "longitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.longitude)",
-            "filename": sound_url!];
 
-        Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: newPost, encoding: .JSON)
-    
-
-    }
     // delegates
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
@@ -229,7 +174,16 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         if let error = error {
             println("error playing back recording")
         } else {
-            geoSoundPlayer!.startPlayingAudio()
+
+            // transition screens
+            let tzsvc:TZSaveViewController = TZSaveViewController()
+
+            tzsvc.file_path = bufferURL
+
+            self.presentViewController(tzsvc, animated: true, completion: nil)
+            
+
+            //            geoSoundPlayer!.startPlayingAudio()
         }
         
         println("Player duration: \(geoSoundPlayer.duration)")
