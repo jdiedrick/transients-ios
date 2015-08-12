@@ -12,7 +12,9 @@ import MotionKit
 
 class TZDriftViewController: UIViewController{
     
-let motionKit = MotionKit()
+var file_path:NSURL?
+
+    let motionKit = MotionKit()
     
 let threshold = 0.5
 let interval = 0.1
@@ -81,6 +83,8 @@ override func viewDidLoad(){
         
         
     }
+    
+    
     
     func DegreesToRadians (value:Double) -> Double {
         return value * M_PI / 180.0

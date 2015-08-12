@@ -195,7 +195,19 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
                         println(json)
                         //let json_data = JSON(JSON as? AnyObject)
                         var json_data = JSON(json!)
-                        self.uploadJSON(json_data)
+                        
+                        if (self.drift_switch!.on){
+                            println("lets drift")
+                            self.activityIndicator!.stopAnimating()
+                            self.activityIndicator!.removeFromSuperview()
+                            self.grayView!.removeFromSuperview()
+                            let dvc:TZDriftViewController = TZDriftViewController()
+                            dvc.file_path = self.file_path
+                            self.presentViewController(dvc, animated: true, completion: nil)
+                        }else{
+                            println("lets anchor")
+                            self.uploadJSON(json_data)
+                        }
                     }
                 case .Failure(let encodingError):
                     println(encodingError)
