@@ -158,18 +158,15 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
    
     
     func uploadAudio(){
-       
         //attempting to upload audio
         println("uploading audio")
-       
-        
-        let fileURL = file_path
+        let fileURL : NSURL = file_path!
         
         Alamofire.upload(
             Alamofire.Method.POST,
             URLString: audio_upload_url,
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: fileURL!, name: "wav")
+                multipartFormData.appendBodyPart(fileURL: fileURL, name: "wav")
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {
@@ -185,7 +182,8 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
                 }
             }
         )
-    
+        
+        
     }
     
     func uploadJSON(jsonData: JSON ){
@@ -194,10 +192,14 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
         println("\(LocationService.sharedInstance.currentLocation)")
        
         var todaysDate:NSDate = NSDate()
-        var dateFormatter:NSDateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
-        var date:String = dateFormatter.stringFromDate(todaysDate)
+        var dateFormatterDate:NSDateFormatter = NSDateFormatter()
+        dateFormatterDate.dateFormat = "yyyy-MM-dd"
+        var date:String = dateFormatterDate.stringFromDate(todaysDate)
        
+        var dateFormatterTime:NSDateFormatter = NSDateFormatter()
+        dateFormatterTime.dateFormat = "hh:mm"
+        var time:String = dateFormatterTime.stringFromDate(todaysDate)
+
         var sound_url = jsonData["filename"].string
         
         var newPost = [
@@ -205,7 +207,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
             "longitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.longitude)",
             "filename": sound_url!,
             "date": date,
-            "time": "4:20",
+            "time": time,
             "title": title_box!.text,
             "description": description_box!.text,
             "tags": tag_box!.text
