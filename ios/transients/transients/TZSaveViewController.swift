@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
+import AVFoundation
 
 let audio_upload_url_local = "http://192.168.0.13:9000/uploadaudio"
 let json_upload_url_local = "http://192.168.0.13:9000/uploadjson"
@@ -17,7 +18,7 @@ let json_upload_url_local = "http://192.168.0.13:9000/uploadjson"
 let audio_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
 let json_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
 
-class TZSaveViewController: UIViewController, UITextFieldDelegate{
+class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayerDelegate{
     
     
     /**
@@ -52,6 +53,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
     var grayView:UIView?
     var activityIndicator:UIActivityIndicatorView?
 
+    var geoSoundPlayer:TZGeoSoundPlayer?
 
     
     override func viewDidLoad(){
@@ -106,6 +108,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
         preview_button?.setTranslatesAutoresizingMaskIntoConstraints(false)
         preview_button?.backgroundColor = UIColor.blueColor()
         preview_button?.setTitle("Preview", forState: UIControlState.Normal)
+        preview_button?.addTarget(self, action: "previewAudio", forControlEvents: UIControlEvents.TouchUpInside)
 
         cancel_button = UIButton()
         cancel_button?.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -244,6 +247,14 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
+    func previewAudio(){
+        geoSoundPlayer = TZGeoSoundPlayer(contentsOfURL: file_path, error: nil)
+        geoSoundPlayer?.delegate = self
+        geoSoundPlayer?.play()
+        
+    }
+    
+    
     func cancelUpload(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -259,4 +270,15 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+    
+    // audio player delegate methods
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+        println("audio player finished playing")
+    }
+    
+    func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
+        println("audio play decode error")
+    }
+    
 }
