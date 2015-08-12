@@ -48,6 +48,9 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
     var cancel_button:UIButton?
    
     var drift_switch:UISwitch?
+    
+    var grayView:UIView?
+    var activityIndicator:UIActivityIndicatorView?
 
 
     
@@ -158,6 +161,20 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
    
     
     func uploadAudio(){
+       
+        grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator!.frame = CGRectMake( (self.view.frame.size.width/2) - 50,
+            (self.view.frame.size.height/2)-50,
+            50,
+            50)
+        
+        view.addSubview(grayView!)
+        view.addSubview(activityIndicator!)
+        activityIndicator!.startAnimating()
+        
         //attempting to upload audio
         println("uploading audio")
         let fileURL : NSURL = file_path!
@@ -213,8 +230,18 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate{
             "tags": tag_box!.text
         ];
 
-        Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: newPost, encoding: .JSON)
-
+        Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: newPost, encoding: .JSON).responseJSON(options: nil) { (request, response, JSON, error) -> Void in
+            println(JSON)
+            self.activityIndicator!.stopAnimating()
+            self.activityIndicator!.removeFromSuperview()
+            self.grayView!.removeFromSuperview()
+            self.dismissViewControllerAnimated(true, completion: {
+                println("switch to map view")
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.tabBarController?.selectedIndex = 2
+            
+            })
+        }
     }
     
     func cancelUpload(){

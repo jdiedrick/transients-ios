@@ -14,7 +14,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var tabBarController: UITabBarController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let window = window{
         
-        let tabBarController = UITabBarController()
+        var tabBarController = UITabBarController()
         let rvc = TZRecorderViewController(nibName: nil, bundle: nil)
         let mvc = TZMapViewController(nibName: nil, bundle: nil)
         let controllers = [rvc, mvc]
