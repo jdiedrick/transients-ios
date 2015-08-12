@@ -1,10 +1,25 @@
 PODS:
   - Alamofire (1.2.3)
+  - MotionKit (0.8.1)
+  - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
+  - MotionKit
+  - SwiftyJSON (~> 2.2.0)
+
+EXTERNAL SOURCES:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: 97c29c6c48c82344a8f4919b1b6517c7957af3a3
+    :git: https://github.com/Alamofire/Alamofire.git
 
 SPEC CHECKSUMS:
   Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
+  MotionKit: a88a7d7b5ed6652793a3744f6ca58227d8804236
+  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 
 COCOAPODS: 0.37.2

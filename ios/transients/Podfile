@@ -5,7 +5,10 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'transients' do
-	pod 'Alamofire'
+	#pod 'Alamofire', '~> 1.2.3'
+	pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
+	pod 'SwiftyJSON', '~> 2.2.0'
+	pod 'MotionKit'
 end
 
 target 'transientsTests' do
