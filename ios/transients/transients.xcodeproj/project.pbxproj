@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8689DFE0401127FC6435AADB /* Pods_transients.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E01BA201B5DAFD400A1774F /* TZDriftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */; };
+		8E4435B71B8100CE0035A361 /* TZUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4435B61B8100CE0035A361 /* TZUploadManager.swift */; };
+		8E4435B91B8112580035A361 /* TZGeoSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4435B81B8112580035A361 /* TZGeoSound.swift */; };
 		8E486BCB1B3E467E00CE41A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E486BCA1B3E467E00CE41A4 /* MapKit.framework */; };
 		8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */; };
 		8ED07CF91B38DAC100C1F950 /* transients.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF71B38DAC100C1F950 /* transients.xcdatamodeld */; };
@@ -36,6 +38,8 @@
 /* Begin PBXFileReference section */
 		7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_transients.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZDriftViewController.swift; sourceTree = "<group>"; };
+		8E4435B61B8100CE0035A361 /* TZUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZUploadManager.swift; sourceTree = "<group>"; };
+		8E4435B81B8112580035A361 /* TZGeoSound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZGeoSound.swift; sourceTree = "<group>"; };
 		8E486BCA1B3E467E00CE41A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8ED07CF01B38DAC100C1F950 /* transients.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transients.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED07CF41B38DAC100C1F950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,7 +114,9 @@
 			children = (
 				8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */,
 				E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */,
+				8E4435B61B8100CE0035A361 /* TZUploadManager.swift */,
 				8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */,
+				8E4435B81B8112580035A361 /* TZGeoSound.swift */,
 				8ED3F7E41B40D87700E26D06 /* TZGeoSoundPlayer.swift */,
 				8ED3F7E21B40D2C200E26D06 /* TZGeoSoundRecorder.swift */,
 				8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */,
@@ -308,12 +314,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E4435B91B8112580035A361 /* TZGeoSound.swift in Sources */,
 				8ED94E611B54C09E00D4A273 /* TZLocationService.swift in Sources */,
 				8E01BA201B5DAFD400A1774F /* TZDriftViewController.swift in Sources */,
 				8ED07CFB1B38DAC100C1F950 /* TZRecorderViewController.swift in Sources */,
 				8ED3F7E31B40D2C200E26D06 /* TZGeoSoundRecorder.swift in Sources */,
 				8ED07CF91B38DAC100C1F950 /* transients.xcdatamodeld in Sources */,
 				8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */,
+				8E4435B71B8100CE0035A361 /* TZUploadManager.swift in Sources */,
 				8ED3F7E51B40D87700E26D06 /* TZGeoSoundPlayer.swift in Sources */,
 				8EE840231B3C78EF0037EC64 /* TZMapViewController.swift in Sources */,
 				E1C7C4221B71983F0099A025 /* TZSaveViewController.swift in Sources */,

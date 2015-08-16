@@ -12,12 +12,6 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 
-let audio_upload_url_local = "http://192.168.0.13:9000/uploadaudio"
-let json_upload_url_local = "http://192.168.0.13:9000/uploadjson"
-
-let audio_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
-let json_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
-
 class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayerDelegate{
     
     
@@ -31,8 +25,6 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
             - display time and date
     **/
 
-    var audio_upload_url = audio_upload_url_dev
-    var json_upload_url = json_upload_url_dev
     
     var file_path:NSURL?
     
@@ -54,6 +46,8 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     var activityIndicator:UIActivityIndicatorView?
 
     var geoSoundPlayer:TZGeoSoundPlayer?
+    
+    var geoSoundUploader:TZUploadManager?
 
     
     override func viewDidLoad(){
@@ -174,98 +168,54 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
             50,
             50)
         
-        view.addSubview(grayView!)
-        view.addSubview(activityIndicator!)
-        activityIndicator!.startAnimating()
+        //view.addSubview(grayView!)
+        //view.addSubview(activityIndicator!)
+        //activityIndicator!.startAnimating()
         
-        //attempting to upload audio
-        println("uploading audio")
         let fileURL : NSURL = file_path!
         
-        Alamofire.upload(
-            Alamofire.Method.POST,
-            URLString: audio_upload_url,
-            multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: fileURL, name: "wav")
-            },
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseJSON { request, response, json, error in
-                        println(json)
-                        //let json_data = JSON(JSON as? AnyObject)
-                        var json_data = JSON(json!)
-                        
-                        if (self.drift_switch!.on){
-                            println("lets drift")
-                            self.activityIndicator!.stopAnimating()
-                            self.activityIndicator!.removeFromSuperview()
-                            self.grayView!.removeFromSuperview()
-                            let dvc:TZDriftViewController = TZDriftViewController()
-                            dvc.file_path = self.file_path
-                            self.presentViewController(dvc, animated: true, completion: nil)
-                        }else{
-                            println("lets anchor")
-                            self.uploadJSON(json_data)
-                        }
-                    }
-                case .Failure(let encodingError):
-                    println(encodingError)
-                }
-            }
-        )
-        
-        
-    }
-    
-    func uploadJSON(jsonData: JSON ){
-       //upload json
-        println("uploading json")
-        println("\(LocationService.sharedInstance.currentLocation)")
-       
         var todaysDate:NSDate = NSDate()
         var dateFormatterDate:NSDateFormatter = NSDateFormatter()
         dateFormatterDate.dateFormat = "yyyy-MM-dd"
+        
         var date:String = dateFormatterDate.stringFromDate(todaysDate)
-       
         var dateFormatterTime:NSDateFormatter = NSDateFormatter()
         dateFormatterTime.dateFormat = "hh:mm"
         var time:String = dateFormatterTime.stringFromDate(todaysDate)
-
-        var sound_url = jsonData["filename"].string
         
-        var newPost = [
-            "latitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.latitude)",
-            "longitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.longitude)",
-            "filename": sound_url!,
-            "date": date,
-            "time": time,
-            "title": title_box!.text,
-            "description": description_box!.text,
-            "tags": tag_box!.text
-        ];
-
-        Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: newPost, encoding: .JSON).responseJSON(options: nil) { (request, response, JSON, error) -> Void in
-            println(JSON)
+        var geoSound : TZGeoSound = TZGeoSound()
+        
+        geoSound.latitude = LocationService.sharedInstance.currentLocation!.coordinate.latitude
+        geoSound.longitude = LocationService.sharedInstance.currentLocation!.coordinate.longitude
+        geoSound.fileURL = fileURL
+        geoSound.date = date
+        geoSound.time = time
+        geoSound.title = title_box!.text
+        geoSound.description = description_box!.text
+        geoSound.tags = tag_box!.text
+        
+       
+        //use uploder class
+        if (self.drift_switch!.on){
+            println("lets drift")
             self.activityIndicator!.stopAnimating()
             self.activityIndicator!.removeFromSuperview()
             self.grayView!.removeFromSuperview()
-            self.dismissViewControllerAnimated(true, completion: {
-                println("switch to map view")
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.tabBarController?.selectedIndex = 2
-            
-            })
+            let dvc:TZDriftViewController = TZDriftViewController()
+            dvc.file_path = self.file_path
+            self.presentViewController(dvc, animated: true, completion: nil)
+        }else{
+            geoSoundUploader = TZUploadManager()
+            geoSoundUploader?.uploadAudio(geoSound)
         }
     }
+    
     
     func previewAudio(){
         geoSoundPlayer = TZGeoSoundPlayer(contentsOfURL: file_path, error: nil)
         geoSoundPlayer?.delegate = self
         geoSoundPlayer?.play()
-        
     }
-    
     
     func cancelUpload(){
         self.dismissViewControllerAnimated(true, completion: nil)
