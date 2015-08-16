@@ -72,7 +72,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
         self.currentHeading = newHeading
-        println("\(newHeading)")
     }
     
     

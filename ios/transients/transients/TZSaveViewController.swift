@@ -12,14 +12,9 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 
-let audio_upload_url_local = "http://192.168.0.13:9000/uploadaudio"
-let json_upload_url_local = "http://192.168.0.13:9000/uploadjson"
 
-let audio_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
-let json_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
-
-class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayerDelegate{
-    
+class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayerDelegate, TZUploadManagerDelegate{
+   
     
     /**
         variables:
@@ -31,8 +26,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
             - display time and date
     **/
 
-    var audio_upload_url = audio_upload_url_dev
-    var json_upload_url = json_upload_url_dev
+    var delegate : TZUploadManagerDelegate?
     
     var file_path:NSURL?
     
@@ -54,7 +48,8 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     var activityIndicator:UIActivityIndicatorView?
 
     var geoSoundPlayer:TZGeoSoundPlayer?
-
+    
+    var geoSoundUploader:TZUploadManager?
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -164,98 +159,44 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
    
     
     func uploadAudio(){
-       
-        grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
-        grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
         
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-        activityIndicator!.frame = CGRectMake( (self.view.frame.size.width/2) - 50,
-            (self.view.frame.size.height/2)-50,
-            50,
-            50)
-        
-        view.addSubview(grayView!)
-        view.addSubview(activityIndicator!)
-        activityIndicator!.startAnimating()
-        
-        //attempting to upload audio
-        println("uploading audio")
         let fileURL : NSURL = file_path!
         
-        Alamofire.upload(
-            Alamofire.Method.POST,
-            URLString: audio_upload_url,
-            multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: fileURL, name: "wav")
-            },
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseJSON { request, response, json, error in
-                        println(json)
-                        //let json_data = JSON(JSON as? AnyObject)
-                        var json_data = JSON(json!)
-                        
-                        if (self.drift_switch!.on){
-                            println("lets drift")
-                            self.activityIndicator!.stopAnimating()
-                            self.activityIndicator!.removeFromSuperview()
-                            self.grayView!.removeFromSuperview()
-                            let dvc:TZDriftViewController = TZDriftViewController()
-                            dvc.file_path = self.file_path
-                            self.presentViewController(dvc, animated: true, completion: nil)
-                        }else{
-                            println("lets anchor")
-                            self.uploadJSON(json_data)
-                        }
-                    }
-                case .Failure(let encodingError):
-                    println(encodingError)
-                }
-            }
-        )
-        
-        
-    }
-    
-    func uploadJSON(jsonData: JSON ){
-       //upload json
-        println("uploading json")
-        println("\(LocationService.sharedInstance.currentLocation)")
-       
         var todaysDate:NSDate = NSDate()
         var dateFormatterDate:NSDateFormatter = NSDateFormatter()
         dateFormatterDate.dateFormat = "yyyy-MM-dd"
+        
         var date:String = dateFormatterDate.stringFromDate(todaysDate)
-       
         var dateFormatterTime:NSDateFormatter = NSDateFormatter()
         dateFormatterTime.dateFormat = "hh:mm"
         var time:String = dateFormatterTime.stringFromDate(todaysDate)
-
-        var sound_url = jsonData["filename"].string
         
-        var newPost = [
-            "latitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.latitude)",
-            "longitude": "\(LocationService.sharedInstance.currentLocation!.coordinate.longitude)",
-            "filename": sound_url!,
-            "date": date,
-            "time": time,
-            "title": title_box!.text,
-            "description": description_box!.text,
-            "tags": tag_box!.text
-        ];
-
-        Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: newPost, encoding: .JSON).responseJSON(options: nil) { (request, response, JSON, error) -> Void in
-            println(JSON)
-            self.activityIndicator!.stopAnimating()
-            self.activityIndicator!.removeFromSuperview()
-            self.grayView!.removeFromSuperview()
-            self.dismissViewControllerAnimated(true, completion: {
-                println("switch to map view")
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.tabBarController?.selectedIndex = 2
+        var geoSound : TZGeoSound = TZGeoSound()
+        
+        geoSound.latitude = LocationService.sharedInstance.currentLocation!.coordinate.latitude
+        geoSound.longitude = LocationService.sharedInstance.currentLocation!.coordinate.longitude
+        geoSound.fileURL = fileURL
+        geoSound.date = date
+        geoSound.time = time
+        geoSound.title = title_box!.text
+        geoSound.description = description_box!.text
+        geoSound.tags = tag_box!.text
+        geoSound.isDrifting = false
+        geoSound.thrownLatitude = geoSound.latitude
+        geoSound.thrownLongitude = geoSound.longitude
+    
+        if (self.drift_switch!.on){
+            println("lets drift")
+            geoSound.isDrifting = true
+            let dvc:TZDriftViewController = TZDriftViewController()
+            dvc.geoSound = geoSound
             
-            })
+            self.presentViewController(dvc, animated: true, completion: nil)
+        } else {
+            geoSoundUploader = TZUploadManager()
+            geoSoundUploader?.delegate = self
+            geoSoundUploader?.uploadAudio(geoSound)
+            
         }
     }
     
@@ -263,9 +204,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         geoSoundPlayer = TZGeoSoundPlayer(contentsOfURL: file_path, error: nil)
         geoSoundPlayer?.delegate = self
         geoSoundPlayer?.play()
-        
     }
-    
     
     func cancelUpload(){
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -292,5 +231,34 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
         println("audio play decode error")
     }
+    
+    //presenting/dismissing protocols
+    
+    func presentLoadingScreen(){
+        println("presenting loading screen")
+        grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator!.frame = CGRectMake(
+            (self.view.frame.size.width/2) - 50,
+            (self.view.frame.size.height/2)-50,
+            50,
+            50)
+        
+        view.addSubview(grayView!)
+        view.addSubview(activityIndicator!)
+        activityIndicator!.startAnimating()
+    }
+    
+    func dismissLoadingScreen(){
+        println("dismissing loading screen")
+        self.activityIndicator!.stopAnimating()
+        self.activityIndicator!.removeFromSuperview()
+        self.grayView!.removeFromSuperview()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+
     
 }
