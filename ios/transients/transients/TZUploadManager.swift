@@ -16,11 +16,16 @@ let json_upload_url_local = "http://192.168.0.13:9000/uploadjson"
 let audio_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
 let json_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
 
-class TZUploadManager : TZSaveViewControllerDelegate{
+protocol TZUploadManagerDelegate{
+    func presentLoadingScreen()
+    func dismissLoadingScreen()
+}
+
+class TZUploadManager{
 
     var audio_upload_url = audio_upload_url_dev
     var json_upload_url = json_upload_url_dev
-    var delegate : TZSaveViewControllerDelegate?
+    var delegate : TZUploadManagerDelegate?
     
     
     func uploadGeoSound(geoSound: TZGeoSound){
@@ -70,7 +75,10 @@ class TZUploadManager : TZSaveViewControllerDelegate{
             "time": "\(geoSound.time!)",
             "title":"\(geoSound.title!)",
             "description": "\(geoSound.description!)",
-            "tags": "\(geoSound.tags!)"
+            "tags": "\(geoSound.tags!)",
+            "isDrifting" : "\(geoSound.isDrifting!)",
+            "thrownLatitude" : "\(geoSound.thrownLatitude!)",
+            "thrownLongitude" : "\(geoSound.thrownLongitude!)"
         ];
         
         

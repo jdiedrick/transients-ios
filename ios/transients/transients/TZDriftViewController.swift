@@ -10,15 +10,21 @@ import Foundation
 import MotionKit
 
 
-class TZDriftViewController: UIViewController{
+class TZDriftViewController: UIViewController, TZUploadManagerDelegate{
     
-var file_path:NSURL?
-
+    var geoSound : TZGeoSound!
+    var geoSoundUploader : TZUploadManager!
+    
     let motionKit = MotionKit()
     
-let threshold = 0.5
-let interval = 0.1
-let magnitude = 5
+    let threshold = 0.5
+    let interval = 0.1
+    let magnitude = 5
+    
+    var isUploading : Bool!
+
+    var grayView:UIView?
+    var activityIndicator:UIActivityIndicatorView?
 
 override func viewDidLoad(){
     view.backgroundColor = UIColor.orangeColor()
@@ -30,6 +36,7 @@ override func viewDidLoad(){
     
     var motionValues = NSMutableArray()
    
+    isUploading = false
     
     
     motionKit.getAccelerometerValues(interval: self.interval) {(x, y, z) -> () in
@@ -56,8 +63,10 @@ override func viewDidLoad(){
                         
                         slowedDown = true
                         motionValues.removeAllObjects()
-                        
-                        self.calculateNewPosition(throwDistance)
+                       
+                        if (!self.isUploading){
+                            self.calculateNewPosition(throwDistance)
+                        }
                     }
                 }
             }
@@ -80,14 +89,54 @@ override func viewDidLoad(){
         var newLng = currentLng + lngDisplacement
         
         println("Distance: \(distance) | Current Lat: \(currentLat) | Current Lng: \(currentLng) | Heading: \(heading) | latDisp: \(latDisplacement) | lngDisp: \(lngDisplacement) | New Lat: \(newLat) | New Lng: \(newLng) ")
+       
+        geoSound.thrownLatitude = newLat
+        geoSound.thrownLongitude = newLng
+        
+        //upload audio
+        self.isUploading = true
+        
+        //set new drift location
+        geoSoundUploader = TZUploadManager()
+        
+        geoSoundUploader.delegate = self
+        geoSoundUploader.uploadAudio(geoSound)
+        
         
         
     }
     
-    
+    //math helpers
     
     func DegreesToRadians (value:Double) -> Double {
         return value * M_PI / 180.0
+    }
+
+    //presenting/dismissing protocols
+    
+    func presentLoadingScreen(){
+        println("presenting loading screen")
+        grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator!.frame = CGRectMake(
+            (self.view.frame.size.width/2) - 50,
+            (self.view.frame.size.height/2)-50,
+            50,
+            50)
+        
+        view.addSubview(grayView!)
+        view.addSubview(activityIndicator!)
+        activityIndicator!.startAnimating()
+    }
+    
+    func dismissLoadingScreen(){
+        println("dismissing loading screen")
+        self.activityIndicator!.stopAnimating()
+        self.activityIndicator!.removeFromSuperview()
+        self.grayView!.removeFromSuperview()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

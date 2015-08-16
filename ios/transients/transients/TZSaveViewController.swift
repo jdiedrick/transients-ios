@@ -12,12 +12,8 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 
-protocol TZSaveViewControllerDelegate{
-    func presentLoadingScreen()
-    func dismissLoadingScreen()
-}
 
-class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayerDelegate, TZSaveViewControllerDelegate{
+class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayerDelegate, TZUploadManagerDelegate{
    
     
     /**
@@ -30,7 +26,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
             - display time and date
     **/
 
-    var delegate : TZSaveViewControllerDelegate?
+    var delegate : TZUploadManagerDelegate?
     
     var file_path:NSURL?
     
@@ -185,22 +181,24 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         geoSound.title = title_box!.text
         geoSound.description = description_box!.text
         geoSound.tags = tag_box!.text
+        geoSound.isDrifting = false
+        geoSound.thrownLatitude = geoSound.latitude
+        geoSound.thrownLongitude = geoSound.longitude
     
         if (self.drift_switch!.on){
             println("lets drift")
-            self.activityIndicator!.stopAnimating()
-            self.activityIndicator!.removeFromSuperview()
-            self.grayView!.removeFromSuperview()
+            geoSound.isDrifting = true
             let dvc:TZDriftViewController = TZDriftViewController()
-            dvc.file_path = self.file_path
+            dvc.geoSound = geoSound
+            
             self.presentViewController(dvc, animated: true, completion: nil)
-        }else{
+        } else {
             geoSoundUploader = TZUploadManager()
             geoSoundUploader?.delegate = self
             geoSoundUploader?.uploadAudio(geoSound)
+            
         }
     }
-    
     
     func previewAudio(){
         geoSoundPlayer = TZGeoSoundPlayer(contentsOfURL: file_path, error: nil)
@@ -254,10 +252,11 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     }
     
     func dismissLoadingScreen(){
-            self.activityIndicator!.stopAnimating()
-            self.activityIndicator!.removeFromSuperview()
-            self.grayView!.removeFromSuperview()
-            self.dismissViewControllerAnimated(true, completion: nil)
+        println("dismissing loading screen")
+        self.activityIndicator!.stopAnimating()
+        self.activityIndicator!.removeFromSuperview()
+        self.grayView!.removeFromSuperview()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 

@@ -12,12 +12,15 @@ class TZGeoSound {
     
     var latitude : Double?
     var longitude : Double?
+    var thrownLatitude : Double?
+    var thrownLongitude : Double?
     var fileURL: NSURL?
     var date : NSString?
     var time : NSString?
     var title : NSString?
     var description : NSString?
     var tags : NSString?
+    var isDrifting : Bool?
     
     
 }
