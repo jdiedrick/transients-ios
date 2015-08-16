@@ -16,10 +16,12 @@ let json_upload_url_local = "http://192.168.0.13:9000/uploadjson"
 let audio_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
 let json_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
 
-class TZUploadManager{
+class TZUploadManager : TZSaveViewControllerDelegate{
 
     var audio_upload_url = audio_upload_url_dev
     var json_upload_url = json_upload_url_dev
+    var delegate : TZSaveViewControllerDelegate?
+    
     
     func uploadGeoSound(geoSound: TZGeoSound){
         println("uploading geo sound")
@@ -28,7 +30,7 @@ class TZUploadManager{
 
     func uploadAudio(geoSound: TZGeoSound){
         println("uploading audio")
-       
+       self.presentLoadingScreen()
         var fileURL = geoSound.fileURL
         
         Alamofire.upload(
@@ -73,16 +75,19 @@ class TZUploadManager{
         
         
         Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: geoSoundDescription, encoding: Alamofire.ParameterEncoding.JSON)
-            /*
             .responseJSON(options: nil) { (request, response, JSON, error) -> Void in
             println(JSON)
-            self.activityIndicator!.stopAnimating()
-            self.activityIndicator!.removeFromSuperview()
-            self.grayView!.removeFromSuperview()
-            self.dismissViewControllerAnimated(true, completion: {
+            self.dismissLoadingScreen()
             
-            })
-            */
         }
-
+        
+    }
+    
+    func presentLoadingScreen(){
+            delegate?.presentLoadingScreen()
+    }
+    
+    func dismissLoadingScreen(){
+            delegate?.dismissLoadingScreen()
+    }
 };

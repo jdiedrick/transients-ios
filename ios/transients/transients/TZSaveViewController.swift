@@ -12,8 +12,13 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 
-class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayerDelegate{
-    
+protocol TZSaveViewControllerDelegate{
+    func presentLoadingScreen()
+    func dismissLoadingScreen()
+}
+
+class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayerDelegate, TZSaveViewControllerDelegate{
+   
     
     /**
         variables:
@@ -25,6 +30,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
             - display time and date
     **/
 
+    var delegate : TZSaveViewControllerDelegate?
     
     var file_path:NSURL?
     
@@ -48,7 +54,6 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     var geoSoundPlayer:TZGeoSoundPlayer?
     
     var geoSoundUploader:TZUploadManager?
-
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -158,19 +163,6 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
    
     
     func uploadAudio(){
-       
-        grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
-        grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
-        
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-        activityIndicator!.frame = CGRectMake( (self.view.frame.size.width/2) - 50,
-            (self.view.frame.size.height/2)-50,
-            50,
-            50)
-        
-        //view.addSubview(grayView!)
-        //view.addSubview(activityIndicator!)
-        //activityIndicator!.startAnimating()
         
         let fileURL : NSURL = file_path!
         
@@ -193,9 +185,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         geoSound.title = title_box!.text
         geoSound.description = description_box!.text
         geoSound.tags = tag_box!.text
-        
-       
-        //use uploder class
+    
         if (self.drift_switch!.on){
             println("lets drift")
             self.activityIndicator!.stopAnimating()
@@ -206,6 +196,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
             self.presentViewController(dvc, animated: true, completion: nil)
         }else{
             geoSoundUploader = TZUploadManager()
+            geoSoundUploader?.delegate = self
             geoSoundUploader?.uploadAudio(geoSound)
         }
     }
@@ -242,5 +233,33 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
         println("audio play decode error")
     }
+    
+    //presenting/dismissing protocols
+    
+    func presentLoadingScreen(){
+        println("presenting loading screen")
+        grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator!.frame = CGRectMake(
+            (self.view.frame.size.width/2) - 50,
+            (self.view.frame.size.height/2)-50,
+            50,
+            50)
+        
+        view.addSubview(grayView!)
+        view.addSubview(activityIndicator!)
+        activityIndicator!.startAnimating()
+    }
+    
+    func dismissLoadingScreen(){
+            self.activityIndicator!.stopAnimating()
+            self.activityIndicator!.removeFromSuperview()
+            self.grayView!.removeFromSuperview()
+            self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+
     
 }
