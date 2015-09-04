@@ -30,7 +30,6 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         setupUI()
         setupAudio()
         LocationService.sharedInstance.startUpdatingLocation()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,13 +77,6 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             AVEncoderBitRateKey: 16,
             AVNumberOfChannelsKey: 2,
             AVSampleRateKey: 44100.0]
-        /*
-        let recordSettings =
-        [AVEncoderAudioQualityKey: AVAudioQuality.Max.rawValue, //maybe worth changing later
-            AVEncoderBitRateKey: 16,
-            AVNumberOfChannelsKey: 1,
-            AVSampleRateKey: 44100.0
-        ]*/
         
         // setup our audio session
         
@@ -175,15 +167,21 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             println("error playing back recording")
         } else {
 
-            // transition screens
-            let tzsvc:TZSaveViewController = TZSaveViewController()
+        let dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let docsDir = dirPaths[0] as! String
+        let soundFilePath = docsDir.stringByAppendingPathComponent("sound.wav")
 
-            tzsvc.file_path = bufferURL
-
-            self.presentViewController(tzsvc, animated: true, completion: nil)
+        AudioHelper.convertFromWavToMp3(soundFilePath, block:{(Bool) in
             
-
-            //            geoSoundPlayer!.startPlayingAudio()
+            let mp3FileName = "Mp3File.mp3"
+            let mp3FilePath = NSTemporaryDirectory().stringByAppendingString(mp3FileName)
+            var mp3URL = NSURL(fileURLWithPath: mp3FilePath)
+            var error : NSError?
+            let tzsvc:TZSaveViewController = TZSaveViewController()
+            tzsvc.file_path = mp3URL!
+            self.presentViewController(tzsvc, animated: true, completion: nil)
+        })
+            
         }
         
         println("Player duration: \(geoSoundPlayer.duration)")

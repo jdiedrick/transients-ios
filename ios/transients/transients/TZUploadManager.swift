@@ -42,7 +42,7 @@ class TZUploadManager{
             Alamofire.Method.POST,
             URLString: audio_upload_url,
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: fileURL!, name: "wav")
+                multipartFormData.appendBodyPart(fileURL: fileURL!, name: "mp3")
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {

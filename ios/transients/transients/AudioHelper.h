@@ -9,5 +9,16 @@
 #ifndef transients_AudioHelper_h
 #define transients_AudioHelper_h
 
+#import <Foundation/Foundation.h>
+
+typedef void(^myCompletion)(BOOL);
+
+@interface AudioHelper : NSObject
+
+@property (strong, nonatomic) id someProperty;
+
++ (void)convertFromWavToMp3:(NSString*)fileName block:(myCompletion) compblock;
+
+@end
 
 #endif
