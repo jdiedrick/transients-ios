@@ -23,8 +23,8 @@ protocol TZUploadManagerDelegate{
 
 class TZUploadManager{
 
-    var audio_upload_url = audio_upload_url_dev
-    var json_upload_url = json_upload_url_dev
+    var audio_upload_url = Constants.API.Production_UploadAudio
+    var json_upload_url = Constants.API.Production_UploadJSON
     var delegate : TZUploadManagerDelegate?
     
     
