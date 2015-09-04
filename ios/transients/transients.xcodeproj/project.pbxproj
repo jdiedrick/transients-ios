@@ -12,6 +12,8 @@
 		8E4435B71B8100CE0035A361 /* TZUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4435B61B8100CE0035A361 /* TZUploadManager.swift */; };
 		8E4435B91B8112580035A361 /* TZGeoSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4435B81B8112580035A361 /* TZGeoSound.swift */; };
 		8E486BCB1B3E467E00CE41A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E486BCA1B3E467E00CE41A4 /* MapKit.framework */; };
+		8E566FE61B97C550008E8FFD /* AudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E566FE51B97C550008E8FFD /* AudioHelper.m */; };
+		8E76F1AF1B96A91C00453AA4 /* lame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E76F1AE1B96A91C00453AA4 /* lame.framework */; };
 		8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */; };
 		8ED07CF91B38DAC100C1F950 /* transients.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF71B38DAC100C1F950 /* transients.xcdatamodeld */; };
 		8ED07CFB1B38DAC100C1F950 /* TZRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */; };
@@ -41,6 +43,10 @@
 		8E4435B61B8100CE0035A361 /* TZUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZUploadManager.swift; sourceTree = "<group>"; };
 		8E4435B81B8112580035A361 /* TZGeoSound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZGeoSound.swift; sourceTree = "<group>"; };
 		8E486BCA1B3E467E00CE41A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8E566FE41B97C550008E8FFD /* transients-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "transients-Bridging-Header.h"; sourceTree = "<group>"; };
+		8E566FE51B97C550008E8FFD /* AudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHelper.m; sourceTree = "<group>"; };
+		8E566FE71B97C5EC008E8FFD /* AudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHelper.h; sourceTree = "<group>"; };
+		8E76F1AE1B96A91C00453AA4 /* lame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = lame.framework; path = "mp3lame-for-iOS/lame.framework"; sourceTree = "<group>"; };
 		8ED07CF01B38DAC100C1F950 /* transients.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transients.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED07CF41B38DAC100C1F950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E76F1AF1B96A91C00453AA4 /* lame.framework in Frameworks */,
 				8E486BCB1B3E467E00CE41A4 /* MapKit.framework in Frameworks */,
 				8689DFE0401127FC6435AADB /* Pods_transients.framework in Frameworks */,
 			);
@@ -83,6 +90,7 @@
 		2CB6CB170D55CA1433A0A071 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E76F1AE1B96A91C00453AA4 /* lame.framework */,
 				8E486BCA1B3E467E00CE41A4 /* MapKit.framework */,
 				7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */,
 			);
@@ -97,6 +105,7 @@
 				8ED07CF11B38DAC100C1F950 /* Products */,
 				C135E6490FA78922C83D1AD1 /* Pods */,
 				2CB6CB170D55CA1433A0A071 /* Frameworks */,
+				8E566FE41B97C550008E8FFD /* transients-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +121,8 @@
 		8ED07CF21B38DAC100C1F950 /* transients */ = {
 			isa = PBXGroup;
 			children = (
+				8E566FE71B97C5EC008E8FFD /* AudioHelper.h */,
+				8E566FE51B97C550008E8FFD /* AudioHelper.m */,
 				8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */,
 				E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */,
 				8E4435B61B8100CE0035A361 /* TZUploadManager.swift */,
@@ -316,6 +327,7 @@
 			files = (
 				8E4435B91B8112580035A361 /* TZGeoSound.swift in Sources */,
 				8ED94E611B54C09E00D4A273 /* TZLocationService.swift in Sources */,
+				8E566FE61B97C550008E8FFD /* AudioHelper.m in Sources */,
 				8E01BA201B5DAFD400A1774F /* TZDriftViewController.swift in Sources */,
 				8ED07CFB1B38DAC100C1F950 /* TZRecorderViewController.swift in Sources */,
 				8ED3F7E31B40D2C200E26D06 /* TZGeoSoundRecorder.swift in Sources */,
@@ -444,10 +456,17 @@
 			baseConfigurationReference = F1F1F2E4BE99EA7D0F555FA8 /* Pods-transients.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mp3lame-for-iOS",
+				);
 				INFOPLIST_FILE = transients/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "transients-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -456,10 +475,16 @@
 			baseConfigurationReference = F22EA1881006184062FB1506 /* Pods-transients.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mp3lame-for-iOS",
+				);
 				INFOPLIST_FILE = transients/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "transients-Bridging-Header.h";
 			};
 			name = Release;
 		};
