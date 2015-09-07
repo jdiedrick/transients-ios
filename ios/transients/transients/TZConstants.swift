@@ -7,12 +7,35 @@
 //
 
 import Foundation
+import UIKit
 
 struct Constants {
     struct API {
         static let Production = "http://www.🎤🌏.ws"
         static let Production_UploadJSON  = "http://www.xn--vg8hjj.ws/uploadjson"
         static let Production_UploadAudio = "http://www.xn--vg8hjj.ws/uploadaudio"
+    }
+   
+    struct Colors{
+    
+        static let backgroundColor = UIColor(
+            red: 10.0/255.0,
+            green: 8.0/255.0,
+            blue: 33.0/255.0,
+            alpha: 1.0)
+
+        static let recordButtonColor = UIColor(
+            red: 192.0/255.0,
+            green: 252.0/255.0,
+            blue: 253.0/255.0,
+            alpha: 1.0)
+    
+        static let textColor = UIColor(
+            red: 86.0/255.0,
+            green: 129.0/255.0,
+            blue: 230.0/255.0,
+            alpha: 1.0)
+    
     }
     
 }
