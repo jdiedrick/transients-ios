@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64BF54C3C297CA2581937997 /* Pods_transientsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99F7E733E7DC486B8CA4A35 /* Pods_transientsTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8689DFE0401127FC6435AADB /* Pods_transients.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E01BA201B5DAFD400A1774F /* TZDriftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */; };
 		8E3D089B1B993AD300DC68F3 /* TZConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3D089A1B993AD300DC68F3 /* TZConstants.swift */; };
 		8E4435B71B8100CE0035A361 /* TZUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4435B61B8100CE0035A361 /* TZUploadManager.swift */; };
 		8E4435B91B8112580035A361 /* TZGeoSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4435B81B8112580035A361 /* TZGeoSound.swift */; };
 		8E486BCB1B3E467E00CE41A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E486BCA1B3E467E00CE41A4 /* MapKit.framework */; };
+		8E5250C61B9DDD470046025B /* TZGeoSoundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5250C51B9DDD470046025B /* TZGeoSoundTests.swift */; };
 		8E566FE61B97C550008E8FFD /* AudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E566FE51B97C550008E8FFD /* AudioHelper.m */; };
 		8E76F1AF1B96A91C00453AA4 /* lame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E76F1AE1B96A91C00453AA4 /* lame.framework */; };
 		8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */; };
@@ -45,6 +47,7 @@
 		8E4435B61B8100CE0035A361 /* TZUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZUploadManager.swift; sourceTree = "<group>"; };
 		8E4435B81B8112580035A361 /* TZGeoSound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZGeoSound.swift; sourceTree = "<group>"; };
 		8E486BCA1B3E467E00CE41A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8E5250C51B9DDD470046025B /* TZGeoSoundTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZGeoSoundTests.swift; sourceTree = "<group>"; };
 		8E566FE41B97C550008E8FFD /* transients-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "transients-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E566FE51B97C550008E8FFD /* AudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHelper.m; sourceTree = "<group>"; };
 		8E566FE71B97C5EC008E8FFD /* AudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHelper.h; sourceTree = "<group>"; };
@@ -63,9 +66,12 @@
 		8ED3F7E41B40D87700E26D06 /* TZGeoSoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZGeoSoundPlayer.swift; sourceTree = "<group>"; };
 		8ED94E601B54C09E00D4A273 /* TZLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZLocationService.swift; sourceTree = "<group>"; };
 		8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZMapViewController.swift; sourceTree = "<group>"; };
+		B99F7E733E7DC486B8CA4A35 /* Pods_transientsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_transientsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0CE233B00EB081315B561D5 /* Pods-transientsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transientsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-transientsTests/Pods-transientsTests.release.xcconfig"; sourceTree = "<group>"; };
 		E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZSaveViewController.swift; sourceTree = "<group>"; };
 		F1F1F2E4BE99EA7D0F555FA8 /* Pods-transients.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transients.debug.xcconfig"; path = "Pods/Target Support Files/Pods-transients/Pods-transients.debug.xcconfig"; sourceTree = "<group>"; };
 		F22EA1881006184062FB1506 /* Pods-transients.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transients.release.xcconfig"; path = "Pods/Target Support Files/Pods-transients/Pods-transients.release.xcconfig"; sourceTree = "<group>"; };
+		F46E0ACA8D5F8137D6FB3E90 /* Pods-transientsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transientsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-transientsTests/Pods-transientsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64BF54C3C297CA2581937997 /* Pods_transientsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +102,7 @@
 				8E76F1AE1B96A91C00453AA4 /* lame.framework */,
 				8E486BCA1B3E467E00CE41A4 /* MapKit.framework */,
 				7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */,
+				B99F7E733E7DC486B8CA4A35 /* Pods_transientsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -156,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				8ED07D0E1B38DAC100C1F950 /* transientsTests.swift */,
+				8E5250C51B9DDD470046025B /* TZGeoSoundTests.swift */,
 				8ED07D0C1B38DAC100C1F950 /* Supporting Files */,
 			);
 			path = transientsTests;
@@ -174,6 +183,8 @@
 			children = (
 				F1F1F2E4BE99EA7D0F555FA8 /* Pods-transients.debug.xcconfig */,
 				F22EA1881006184062FB1506 /* Pods-transients.release.xcconfig */,
+				F46E0ACA8D5F8137D6FB3E90 /* Pods-transientsTests.debug.xcconfig */,
+				C0CE233B00EB081315B561D5 /* Pods-transientsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -205,9 +216,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8ED07D151B38DAC100C1F950 /* Build configuration list for PBXNativeTarget "transientsTests" */;
 			buildPhases = (
+				A92E0A6DB571C098E1BB4F96 /* Check Pods Manifest.lock */,
 				8ED07D041B38DAC100C1F950 /* Sources */,
 				8ED07D051B38DAC100C1F950 /* Frameworks */,
 				8ED07D061B38DAC100C1F950 /* Resources */,
+				85626DB0C331D1A9D95F36A1 /* Embed Pods Frameworks */,
+				89FAB20BD8E21FEE55A3CE11 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -291,6 +305,51 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		85626DB0C331D1A9D95F36A1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-transientsTests/Pods-transientsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89FAB20BD8E21FEE55A3CE11 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-transientsTests/Pods-transientsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A92E0A6DB571C098E1BB4F96 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		D4C33487055CFA21A64CBFCA /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ED07D0F1B38DAC100C1F950 /* transientsTests.swift in Sources */,
+				8E5250C61B9DDD470046025B /* TZGeoSoundTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +454,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -438,6 +499,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -461,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mp3lame-for-iOS",
@@ -480,6 +543,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mp3lame-for-iOS",
@@ -494,6 +558,7 @@
 		};
 		8ED07D161B38DAC100C1F950 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F46E0ACA8D5F8137D6FB3E90 /* Pods-transientsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -513,6 +578,7 @@
 		};
 		8ED07D171B38DAC100C1F950 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0CE233B00EB081315B561D5 /* Pods-transientsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
