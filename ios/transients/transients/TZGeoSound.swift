@@ -8,19 +8,20 @@
 
 import Foundation
 
-class TZGeoSound {
+public class TZGeoSound {
     
-    var latitude : Double?
-    var longitude : Double?
-    var thrownLatitude : Double?
-    var thrownLongitude : Double?
-    var fileURL: NSURL?
-    var date : NSString?
-    var time : NSString?
-    var title : NSString?
-    var description : NSString?
-    var tags : NSString?
-    var isDrifting : Bool?
-    
+    var latitude : Double? = nil
+    var longitude : Double? = nil
+    var thrownLatitude : Double? = nil
+    var thrownLongitude : Double? = nil
+    public var fileURL: NSURL? = nil
+    var date : NSString? = nil
+    var time : NSString? = nil
+    var title : NSString? = nil
+    var description : NSString? = nil
+    var tags : NSString? = nil
+    var isDrifting : Bool? = nil
+   
+    public init(){}
     
 }
