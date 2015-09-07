@@ -107,6 +107,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8E22A3881B9DF0DB00BE3809 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */,
+				8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */,
+				8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */,
+				8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8E22A3891B9DF0F000BE3809 /* AudioHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				8E566FE71B97C5EC008E8FFD /* AudioHelper.h */,
+				8E566FE51B97C550008E8FFD /* AudioHelper.m */,
+			);
+			name = AudioHelpers;
+			sourceTree = "<group>";
+		};
+		8E22A38B1B9DF11700BE3809 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8E4435B81B8112580035A361 /* TZGeoSound.swift */,
+				8ED3F7E41B40D87700E26D06 /* TZGeoSoundPlayer.swift */,
+				8ED3F7E21B40D2C200E26D06 /* TZGeoSoundRecorder.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		8ED07CE71B38DAC100C1F950 = {
 			isa = PBXGroup;
 			children = (
@@ -131,19 +161,13 @@
 		8ED07CF21B38DAC100C1F950 /* transients */ = {
 			isa = PBXGroup;
 			children = (
-				8E566FE71B97C5EC008E8FFD /* AudioHelper.h */,
-				8E566FE51B97C550008E8FFD /* AudioHelper.m */,
-				8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */,
-				E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */,
-				8E4435B61B8100CE0035A361 /* TZUploadManager.swift */,
 				8E3D089A1B993AD300DC68F3 /* TZConstants.swift */,
-				8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */,
-				8E4435B81B8112580035A361 /* TZGeoSound.swift */,
-				8ED3F7E41B40D87700E26D06 /* TZGeoSoundPlayer.swift */,
-				8ED3F7E21B40D2C200E26D06 /* TZGeoSoundRecorder.swift */,
-				8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */,
-				8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */,
+				8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */,
 				8ED94E601B54C09E00D4A273 /* TZLocationService.swift */,
+				8E4435B61B8100CE0035A361 /* TZUploadManager.swift */,
+				8E22A3881B9DF0DB00BE3809 /* ViewControllers */,
+				8E22A3891B9DF0F000BE3809 /* AudioHelpers */,
+				8E22A38B1B9DF11700BE3809 /* Models */,
 				8ED07CFF1B38DAC100C1F950 /* Images.xcassets */,
 				8ED07D011B38DAC100C1F950 /* LaunchScreen.xib */,
 				8ED07CF71B38DAC100C1F950 /* transients.xcdatamodeld */,

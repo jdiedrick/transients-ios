@@ -31,9 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.viewControllers = controllers
         
         window.rootViewController = tabBarController
-        
+       
+        tabBarController.tabBar.tintColor = Constants.Colors.textColor
+        tabBarController.tabBar.barTintColor = Constants.Colors.backgroundColor
+            
         rvc.tabBarItem = UITabBarItem(title: "Record", image: nil, tag: 1)
         mvc.tabBarItem = UITabBarItem(title: "Map", image: nil, tag: 2)
+            
+            
         
         //these two lines are used to custom make tzdriftviewcontroller load first for testing
 //        let rootViewController : UIViewController = TZDriftViewController()

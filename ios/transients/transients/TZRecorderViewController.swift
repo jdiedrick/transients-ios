@@ -26,10 +26,9 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-            view.backgroundColor = UIColor.blueColor()
         setupUI()
         setupAudio()
-        LocationService.sharedInstance.startUpdatingLocation()
+        setupLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,7 +37,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     }
     
     func setupUI(){
-        
+        view.backgroundColor = Constants.Colors.backgroundColor
         //record button
         let buttonWidth : CGFloat! = baseRecordButtonSizeRad
         let buttonHeight : CGFloat! = baseRecordButtonSizeRad
@@ -49,7 +48,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             buttonHeight))
         recordButton.layer.cornerRadius = buttonWidth/2;
         
-        recordButton.backgroundColor = UIColor.orangeColor()
+        recordButton.backgroundColor = Constants.Colors.recordButtonColor
         
         recordButton.addTarget(self, action: "startRecording:", forControlEvents: UIControlEvents.TouchDown)
         recordButton.addTarget(self, action: "stopRecording:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -130,6 +129,10 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
                 selector:"updateAudioMeter:",
                 userInfo:nil,
                 repeats:true)
+    }
+    
+    func setupLocation(){
+        LocationService.sharedInstance.startUpdatingLocation()
     }
     
     // ui events

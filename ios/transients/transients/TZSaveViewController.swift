@@ -54,7 +54,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     override func viewDidLoad(){
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.grayColor()
+        view.backgroundColor = Constants.Colors.backgroundColor
         
         //gesture for dismissing keyboard
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
