@@ -35,6 +35,13 @@ struct Constants {
             green: 129.0/255.0,
             blue: 230.0/255.0,
             alpha: 1.0)
+        
+        static let recordingColor = UIColor(
+            red: 189.0/255.0,
+            green: 88.0/255.0,
+            blue: 205.0/255.0,
+            alpha: 1.0)
+        
     
     }
     

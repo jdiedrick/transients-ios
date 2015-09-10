@@ -11,7 +11,7 @@ import UIKit
 import AVFoundation
 
 
-class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIGestureRecognizerDelegate {
 
     var recordButton = UIButton()
 
@@ -23,12 +23,16 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
 
     var meterTimer:NSTimer!
     
+    var uploadTime: Int = 0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupUI()
         setupAudio()
         setupLocation()
+        setupGestureRecognizer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,8 +54,9 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         
         recordButton.backgroundColor = Constants.Colors.recordButtonColor
         
-        recordButton.addTarget(self, action: "startRecording:", forControlEvents: UIControlEvents.TouchDown)
-        recordButton.addTarget(self, action: "stopRecording:", forControlEvents: UIControlEvents.TouchUpInside)
+        //recordButton.addTarget(self, action: "startRecording:", forControlEvents: UIControlEvents.TouchDown)
+        //recordButton.addTarget(self, action: "stopRecording:", forControlEvents: UIControlEvents.TouchUpInside)
+        recordButton.addTarget(self, action: "startRecordingForDuration:", forControlEvents: UIControlEvents.TouchUpInside)
         
         self.view.addSubview(recordButton)
        
@@ -135,6 +140,42 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         LocationService.sharedInstance.startUpdatingLocation()
     }
     
+    func setupGestureRecognizer(){
+        let gestureRecognizer : UITapGestureRecognizer! = UITapGestureRecognizer(target: self, action: "handleTap:")
+        gestureRecognizer.delegate = self
+        gestureRecognizer.numberOfTapsRequired = 5
+        self.view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func handleTap(recognizer: UITapGestureRecognizer) {
+        println("recognized gesture")
+        var alertController:UIAlertController?
+        alertController = UIAlertController(title: "Enter Recording Time", message: "Enter Recording Time", preferredStyle: .Alert)
+        alertController!.addTextFieldWithConfigurationHandler(
+            {(textField: UITextField!) in
+                textField.placeholder = "Enter recordind time"
+        })
+        
+        let action = UIAlertAction(title: "Submit",
+            style: UIAlertActionStyle.Default,
+            handler: {[weak self]
+                (paramAction:UIAlertAction!) in
+                if let textFields = alertController?.textFields{
+                    let theTextFields = textFields as! [UITextField]
+                    let enteredText = theTextFields[0].text
+                    self!.uploadTime = enteredText.toInt()!
+                    println("\(self!.uploadTime)")
+                }
+            })
+        
+        alertController?.addAction(action)
+        self.presentViewController(alertController!,
+            animated: true,
+            completion: nil)
+        
+        
+    }
+    
     // ui events
 
     func startRecording(sender:UIButton!){
@@ -148,6 +189,17 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         println("transitioning")
     }
 
+    func startRecordingForDuration(sender:UIButton!){
+        self.recordButton.backgroundColor = Constants.Colors.recordingColor
+        
+        if (uploadTime == 0){
+            uploadTime = 5 // set a resonable initial time interval
+        }
+        var timeInterval : NSTimeInterval! = NSTimeInterval(uploadTime)
+        geoSoundRecorder!.recordForDuration(timeInterval)
+        
+        
+    }
 
     // delegates
     
@@ -160,6 +212,9 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
+        
+        self.recordButton.backgroundColor = Constants.Colors.recordButtonColor
+        
         println("audio recorder did finish recording")
         var bufferURL = geoSoundRecorder.url
         var error: NSError?
