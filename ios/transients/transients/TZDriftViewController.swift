@@ -27,7 +27,29 @@ class TZDriftViewController: UIViewController, TZUploadManagerDelegate{
     var activityIndicator:UIActivityIndicatorView?
 
 override func viewDidLoad(){
-    view.backgroundColor = UIColor.orangeColor()
+    view.backgroundColor = Constants.Colors.backgroundColor
+    
+    var textView : UITextView = UITextView()
+    
+    textView.frame = CGRectMake(
+        0,
+        self.view.frame.height/2,
+        self.view.frame.size.width,
+        self.view.frame.size.height)
+    
+    textView.textColor = Constants.Colors.textColor
+    
+    textView.text = "Hold phone tightly \n and throw sound \n into the world!"
+    
+    textView.font = UIFont(name: textView.font.fontName, size: 32)
+    
+    textView.backgroundColor = Constants.Colors.backgroundColor
+    
+    textView.textAlignment = .Center
+    
+    textView.editable = false
+    
+    self.view.addSubview(textView)
    
     
     LocationService.sharedInstance.startUpdatingLocation()
