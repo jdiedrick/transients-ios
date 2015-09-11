@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let window = window{
         
         var tabBarController = UITabBarController()
+        
         let rvc = TZRecorderViewController(nibName: nil, bundle: nil)
         let mvc = TZMapViewController(nibName: nil, bundle: nil)
         let controllers = [rvc, mvc]

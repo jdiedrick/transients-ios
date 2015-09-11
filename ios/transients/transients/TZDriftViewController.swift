@@ -137,16 +137,19 @@ override func viewDidLoad(){
     //presenting/dismissing protocols
     
     func presentLoadingScreen(){
-        println("presenting loading screen")
+        println("presenting loading screen for drift")
         grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
         grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
         
+        
+        var activityIndicator_width : CGFloat = 50
+        var activityIndicator_height : CGFloat = 50
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         activityIndicator!.frame = CGRectMake(
-            (self.view.frame.size.width/2) - 50,
-            (self.view.frame.size.height/2)-50,
-            50,
-            50)
+            (self.view.frame.size.width/2) - (activityIndicator_width/2),
+            (self.view.frame.size.height/2)-(activityIndicator_height/2),
+            activityIndicator_width,
+            activityIndicator_width)
         
         view.addSubview(grayView!)
         view.addSubview(activityIndicator!)
@@ -154,7 +157,7 @@ override func viewDidLoad(){
     }
     
     func dismissLoadingScreen(){
-        println("dismissing loading screen")
+        println("dismissing loading screen for drift")
         self.activityIndicator!.stopAnimating()
         self.activityIndicator!.removeFromSuperview()
         self.grayView!.removeFromSuperview()

@@ -59,15 +59,12 @@ class TZUploadManager{
         println("uploading json")
         println("\(LocationService.sharedInstance.currentLocation!)")
 
-        //var sound_url = jsonData["filename"].string
-        
         var geoSoundDescription = [
             "latitude": "\(geoSound.latitude!)",
             "longitude": "\(geoSound.longitude!)",
             "filename": "\(geoSound.fileURL!.absoluteString!)",
             "date": "\(geoSound.date!)",
             "time": "\(geoSound.time!)",
-            "title":"\(geoSound.title!)",
             "description": "\(geoSound.description!)",
             "tags": "\(geoSound.tags!)",
             "isDrifting" : "\(geoSound.isDrifting!)",

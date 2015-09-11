@@ -42,7 +42,17 @@ struct Constants {
             blue: 205.0/255.0,
             alpha: 1.0)
         
+        static let box1Color = UIColor(
+            red: 178.0/255.0,
+            green: 120.0/255.0,
+            blue: 244.0/255.0,
+            alpha: 1.0)
     
+        static let box2Color = UIColor(
+            red: 189.0/255.0,
+            green: 88.0/255.0,
+            blue: 205.0/255.0,
+            alpha: 1.0)
     }
     
 }
