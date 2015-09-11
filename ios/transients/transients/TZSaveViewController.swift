@@ -33,11 +33,14 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     var description_box:UITextField?
     //var tag_box:UITextField?
     
+    var drift_switch:UISwitch?
+
+    var drift_label:UILabel?
+    
     var upload_button:UIButton?
     var preview_button:UIButton?
     var cancel_button:UIButton?
    
-    var drift_switch:UISwitch?
     
     var grayView:UIView?
     var activityIndicator:UIActivityIndicatorView?
@@ -62,6 +65,16 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         description_box?.textColor = Constants.Colors.textColor
         description_box?.placeholder = "Describe your transient! (#s work too)"
 
+        drift_label = UILabel()
+        drift_label?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        drift_label?.backgroundColor = Constants.Colors.backgroundColor
+        drift_label?.textColor = Constants.Colors.textColor
+        drift_label?.text = "On = Drift / Off = Anchor"
+        
+        drift_switch = UISwitch()
+        drift_switch?.onTintColor = Constants.Colors.recordingColor
+        drift_switch?.setTranslatesAutoresizingMaskIntoConstraints(false)
+
         upload_button = UIButton()
         upload_button?.setTranslatesAutoresizingMaskIntoConstraints(false)
         upload_button?.backgroundColor = Constants.Colors.box2Color
@@ -83,27 +96,24 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         cancel_button?.setTitle("Cancel", forState: UIControlState.Normal)
         cancel_button?.addTarget(self, action: "cancelUpload", forControlEvents: UIControlEvents.TouchUpInside)
         
-        drift_switch = UISwitch()
-        drift_switch?.onTintColor = Constants.Colors.recordingColor
-        drift_switch?.setTranslatesAutoresizingMaskIntoConstraints(false)
         
 
         let viewsDictionary = [
             "description_box":description_box!,
-         //   "tag_box":tag_box!,
+            "drift_switch":drift_switch!,
+            "drift_label":drift_label!,
             "upload_button":upload_button!,
             "preview_button":preview_button!,
-            "cancel_button":cancel_button!,
-            "drift_switch":drift_switch!
+            "cancel_button":cancel_button!
         ]
 
         
         self.view.addSubview(description_box!)
-       // self.view.addSubview(tag_box!)
+        self.view.addSubview(drift_switch!)
+        self.view.addSubview(drift_label!)
         self.view.addSubview(upload_button!)
         self.view.addSubview(preview_button!)
         self.view.addSubview(cancel_button!)
-        self.view.addSubview(drift_switch!)
         
         //position constraints
 
@@ -111,7 +121,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         // thx http://makeapppie.com/2014/07/26/the-swift-swift-tutorial-how-to-use-uiviews-with-auto-layout-programmatically/
 
         let view_constraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-36-[description_box]-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: viewsDictionary)
-        let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[description_box]-[upload_button]-[preview_button]-[cancel_button]-[drift_switch]-20-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
+        let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[description_box]-[drift_switch]-[drift_label]-[upload_button]-[preview_button]-[cancel_button]-20-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
         
         view.addConstraints(view_constraint_H as [AnyObject])
         view.addConstraints(view_constraint_V as [AnyObject])
