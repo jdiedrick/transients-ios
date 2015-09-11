@@ -151,8 +151,8 @@ override func viewDidLoad(){
             activityIndicator_width,
             activityIndicator_width)
         
-        view.addSubview(grayView!)
-        view.addSubview(activityIndicator!)
+        self.view.addSubview(grayView!)
+        self.view.addSubview(activityIndicator!)
         activityIndicator!.startAnimating()
     }
     

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
+import AudioToolbox
 
 protocol TZUploadManagerDelegate{
     func presentLoadingScreen()
@@ -29,6 +30,7 @@ class TZUploadManager{
 
     func uploadAudio(geoSound: TZGeoSound){
         println("uploading audio")
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
        self.presentLoadingScreen()
         var fileURL = geoSound.fileURL
         
