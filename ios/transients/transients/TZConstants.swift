@@ -15,6 +15,10 @@ struct Constants {
         static let Production_UploadJSON  = "http://www.xn--vg8hjj.ws/uploadjson"
         static let Production_UploadAudio = "http://www.xn--vg8hjj.ws/uploadaudio"
     }
+    
+    struct Map {
+        static let Production = "http://www.xn--vg8hjj.ws/mapb"
+    }
    
     struct Colors{
     
