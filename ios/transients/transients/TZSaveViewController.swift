@@ -139,7 +139,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         
         var date:String = dateFormatterDate.stringFromDate(todaysDate)
         var dateFormatterTime:NSDateFormatter = NSDateFormatter()
-        dateFormatterTime.dateFormat = "hh:mm"
+        dateFormatterTime.dateFormat = "h:mm a"
         var time:String = dateFormatterTime.stringFromDate(todaysDate)
         
         var geoSound : TZGeoSound = TZGeoSound()
