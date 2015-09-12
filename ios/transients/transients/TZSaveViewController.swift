@@ -62,8 +62,9 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         description_box?.delegate = self
         description_box?.setTranslatesAutoresizingMaskIntoConstraints(false)
         description_box?.backgroundColor = Constants.Colors.box1Color
-        description_box?.textColor = Constants.Colors.textColor
-        description_box?.placeholder = "Describe your transient! (#s work too)"
+        description_box?.textColor = Constants.Colors.text2Color
+        description_box?.attributedPlaceholder = NSAttributedString(string:"Describe your transient!",
+            attributes:[NSForegroundColorAttributeName: Constants.Colors.text2Color])
 
         drift_label = UILabel()
         drift_label?.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -74,6 +75,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         drift_switch = UISwitch()
         drift_switch?.onTintColor = Constants.Colors.recordingColor
         drift_switch?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        drift_switch?.setOn(true, animated: false)
 
         upload_button = UIButton()
         upload_button?.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -121,7 +123,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         // thx http://makeapppie.com/2014/07/26/the-swift-swift-tutorial-how-to-use-uiviews-with-auto-layout-programmatically/
 
         let view_constraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-36-[description_box]-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: viewsDictionary)
-        let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[description_box]-[drift_switch]-[drift_label]-[upload_button]-[preview_button]-[cancel_button]-20-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
+        let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-100-[description_box]-100-[drift_switch]-[drift_label]-[upload_button]-[preview_button]-[cancel_button]-20-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
         
         view.addConstraints(view_constraint_H as [AnyObject])
         view.addConstraints(view_constraint_V as [AnyObject])
