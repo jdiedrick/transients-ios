@@ -88,10 +88,10 @@
 		8E22A3881B9DF0DB00BE3809 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */,
 				8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */,
-				8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */,
+				E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */,
 				8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */,
+				8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

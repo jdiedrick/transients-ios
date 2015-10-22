@@ -124,8 +124,6 @@ override func viewDidLoad(){
         geoSoundUploader.delegate = self
         geoSoundUploader.uploadAudio(geoSound)
         
-        
-        
     }
     
     //math helpers
@@ -161,7 +159,8 @@ override func viewDidLoad(){
         self.activityIndicator!.stopAnimating()
         self.activityIndicator!.removeFromSuperview()
         self.grayView!.removeFromSuperview()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(false, completion: nil)
     }
     
 }

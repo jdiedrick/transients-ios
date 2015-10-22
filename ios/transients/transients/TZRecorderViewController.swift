@@ -242,6 +242,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             let tzsvc:TZSaveViewController = TZSaveViewController()
             tzsvc.file_path = mp3URL!
             self.presentViewController(tzsvc, animated: true, completion: nil)
+            
         })
             
         }
