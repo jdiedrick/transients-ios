@@ -54,9 +54,12 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         
         recordButton.backgroundColor = Constants.Colors.recordButtonColor
         
-        //recordButton.addTarget(self, action: "startRecording:", forControlEvents: UIControlEvents.TouchDown)
-        //recordButton.addTarget(self, action: "stopRecording:", forControlEvents: UIControlEvents.TouchUpInside)
-        recordButton.addTarget(self, action: "startRecordingForDuration:", forControlEvents: UIControlEvents.TouchUpInside)
+        //holding recording
+        recordButton.addTarget(self, action: "startRecording:", forControlEvents: UIControlEvents.TouchDown)
+        recordButton.addTarget(self, action: "stopRecording:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        //durational recording
+        //recordButton.addTarget(self, action: "startRecordingForDuration:", forControlEvents: UIControlEvents.TouchUpInside)
         
         self.view.addSubview(recordButton)
        
@@ -180,6 +183,7 @@ class TZRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAud
 
     func startRecording(sender:UIButton!){
         println("start recording")
+        self.recordButton.backgroundColor = Constants.Colors.recordingColor
         geoSoundRecorder!.startRecordingAudio();
     }
 
