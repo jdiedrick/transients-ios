@@ -15,6 +15,10 @@ struct Constants {
         static let Production_UploadJSON  = "http://www.xn--vg8hjj.ws/uploadjson"
         static let Production_UploadAudio = "http://www.xn--vg8hjj.ws/uploadaudio"
     }
+    
+    struct Map {
+        static let Production = "http://www.xn--vg8hjj.ws/mapb"
+    }
    
     struct Colors{
     
@@ -35,7 +39,31 @@ struct Constants {
             green: 129.0/255.0,
             blue: 230.0/255.0,
             alpha: 1.0)
+        
+        static let text2Color = UIColor(
+            red: 240.0/255.0,
+            green: 200.0/255.0,
+            blue: 222.0/255.0,
+            alpha: 1.0)
+
+        
+        static let recordingColor = UIColor(
+            red: 189.0/255.0,
+            green: 88.0/255.0,
+            blue: 205.0/255.0,
+            alpha: 1.0)
+        
+        static let box1Color = UIColor(
+            red: 178.0/255.0,
+            green: 120.0/255.0,
+            blue: 244.0/255.0,
+            alpha: 1.0)
     
+        static let box2Color = UIColor(
+            red: 189.0/255.0,
+            green: 88.0/255.0,
+            blue: 205.0/255.0,
+            alpha: 1.0)
     }
     
 }

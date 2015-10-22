@@ -9,12 +9,7 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
-
-let audio_upload_url_local = "http://192.168.0.13:9000/uploadaudio"
-let json_upload_url_local = "http://192.168.0.13:9000/uploadjson"
-
-let audio_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadaudio"
-let json_upload_url_dev = "http://ec2-52-24-91-31.us-west-2.compute.amazonaws.com:9000/uploadjson"
+import AudioToolbox
 
 protocol TZUploadManagerDelegate{
     func presentLoadingScreen()
@@ -35,6 +30,7 @@ class TZUploadManager{
 
     func uploadAudio(geoSound: TZGeoSound){
         println("uploading audio")
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
        self.presentLoadingScreen()
         var fileURL = geoSound.fileURL
         
@@ -65,15 +61,12 @@ class TZUploadManager{
         println("uploading json")
         println("\(LocationService.sharedInstance.currentLocation!)")
 
-        //var sound_url = jsonData["filename"].string
-        
         var geoSoundDescription = [
             "latitude": "\(geoSound.latitude!)",
             "longitude": "\(geoSound.longitude!)",
             "filename": "\(geoSound.fileURL!.absoluteString!)",
             "date": "\(geoSound.date!)",
             "time": "\(geoSound.time!)",
-            "title":"\(geoSound.title!)",
             "description": "\(geoSound.description!)",
             "tags": "\(geoSound.tags!)",
             "isDrifting" : "\(geoSound.isDrifting!)",

@@ -27,7 +27,29 @@ class TZDriftViewController: UIViewController, TZUploadManagerDelegate{
     var activityIndicator:UIActivityIndicatorView?
 
 override func viewDidLoad(){
-    view.backgroundColor = UIColor.orangeColor()
+    view.backgroundColor = Constants.Colors.backgroundColor
+    
+    var textView : UITextView = UITextView()
+    
+    textView.frame = CGRectMake(
+        0,
+        self.view.frame.height/2,
+        self.view.frame.size.width,
+        self.view.frame.size.height)
+    
+    textView.textColor = Constants.Colors.textColor
+    
+    textView.text = "Hold phone tightly \n and throw sound \n into the world!"
+    
+    textView.font = UIFont(name: textView.font.fontName, size: 32)
+    
+    textView.backgroundColor = Constants.Colors.backgroundColor
+    
+    textView.textAlignment = .Center
+    
+    textView.editable = false
+    
+    self.view.addSubview(textView)
    
     
     LocationService.sharedInstance.startUpdatingLocation()
@@ -102,8 +124,6 @@ override func viewDidLoad(){
         geoSoundUploader.delegate = self
         geoSoundUploader.uploadAudio(geoSound)
         
-        
-        
     }
     
     //math helpers
@@ -115,28 +135,32 @@ override func viewDidLoad(){
     //presenting/dismissing protocols
     
     func presentLoadingScreen(){
-        println("presenting loading screen")
+        println("presenting loading screen for drift")
         grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
         grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
         
+        
+        var activityIndicator_width : CGFloat = 50
+        var activityIndicator_height : CGFloat = 50
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         activityIndicator!.frame = CGRectMake(
-            (self.view.frame.size.width/2) - 50,
-            (self.view.frame.size.height/2)-50,
-            50,
-            50)
+            (self.view.frame.size.width/2) - (activityIndicator_width/2),
+            (self.view.frame.size.height/2)-(activityIndicator_height/2),
+            activityIndicator_width,
+            activityIndicator_width)
         
-        view.addSubview(grayView!)
-        view.addSubview(activityIndicator!)
+        self.view.addSubview(grayView!)
+        self.view.addSubview(activityIndicator!)
         activityIndicator!.startAnimating()
     }
     
     func dismissLoadingScreen(){
-        println("dismissing loading screen")
+        println("dismissing loading screen for drift")
         self.activityIndicator!.stopAnimating()
         self.activityIndicator!.removeFromSuperview()
         self.grayView!.removeFromSuperview()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(false, completion: nil)
     }
     
 }
