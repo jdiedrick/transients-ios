@@ -18,7 +18,7 @@ class TZGeoSoundRecorder : AVAudioRecorder{
     }
 
     func stopRecordingAudio(){
-        println("\(self.currentTime)")
+        print("\(self.currentTime)")
         if self.recording == true{
             self.stop()
         }

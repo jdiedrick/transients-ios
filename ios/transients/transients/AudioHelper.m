@@ -21,7 +21,10 @@
     mp3FileName = [mp3FileName stringByAppendingString:@".mp3"];
     NSString *mp3FilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:mp3FileName];
     
-    NSLog(@"%@", mp3FilePath);
+    NSLog(@"WAV Path: %@", filePath);
+    NSLog(@"MP3 Path: %@", mp3FilePath);
+    
+    
     
     @try {
         int read, write;

@@ -1,25 +1,30 @@
 PODS:
-  - Alamofire (1.2.3)
+  - Alamofire (3.1.3)
   - MotionKit (0.8.1)
-  - SwiftyJSON (2.2.0)
+  - SwiftyJSON (2.3.1)
 
 DEPENDENCIES:
-  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
-  - MotionKit
-  - SwiftyJSON (~> 2.2.0)
+  - Alamofire (~> 3.0)
+  - MotionKit (from `https://github.com/Jirka1111/MotionKit.git`)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
-  Alamofire:
-    :git: https://github.com/Alamofire/Alamofire.git
+  MotionKit:
+    :git: https://github.com/Jirka1111/MotionKit.git
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
-  Alamofire:
-    :commit: 97c29c6c48c82344a8f4919b1b6517c7957af3a3
-    :git: https://github.com/Alamofire/Alamofire.git
+  MotionKit:
+    :commit: 98b2aafebb785c5bb01a14a9452adb7c118592ad
+    :git: https://github.com/Jirka1111/MotionKit.git
+  SwiftyJSON:
+    :commit: a4cce2ec0bf31bfec2cf4cc7f1030a59a7bc95d2
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
+  Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
   MotionKit: a88a7d7b5ed6652793a3744f6ca58227d8804236
-  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
+  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

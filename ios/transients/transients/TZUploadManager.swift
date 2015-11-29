@@ -24,33 +24,34 @@ class TZUploadManager{
     
     
     func uploadGeoSound(geoSound: TZGeoSound){
-        println("uploading geo sound")
+        print("uploading geo sound")
         self.uploadAudio(geoSound)
     }
 
     func uploadAudio(geoSound: TZGeoSound){
-        println("uploading audio")
+        print("uploading audio")
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
        self.presentLoadingScreen()
-        var fileURL = geoSound.fileURL
+       let fileURL = geoSound.fileURL
+        
         
         Alamofire.upload(
             Alamofire.Method.POST,
-            URLString: audio_upload_url,
+            audio_upload_url,
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(fileURL: fileURL!, name: "mp3")
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseJSON { request, response, json, error in
-                        println(json)
-                        var json_data = JSON(json!)
-                        geoSound.fileURL = NSURL(string: json_data["filename"].string!)
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                        //var json_data = JSON(response)
+                        //geoSound.fileURL = NSURL(string: json_data["filename"].string!)
                         self.uploadJSON(geoSound)
                     }
                 case .Failure(let encodingError):
-                    println(encodingError)
+                    print(encodingError)
                 }
             }
         )
@@ -58,13 +59,13 @@ class TZUploadManager{
     
     func uploadJSON(geoSound : TZGeoSound){
        //upload json
-        println("uploading json")
-        println("\(LocationService.sharedInstance.currentLocation!)")
+        print("uploading json")
+        //println("\(LocationService.sharedInstance.currentLocation!)")
 
         var geoSoundDescription = [
             "latitude": "\(geoSound.latitude!)",
             "longitude": "\(geoSound.longitude!)",
-            "filename": "\(geoSound.fileURL!.absoluteString!)",
+            "filename": "\(geoSound.fileURL!.absoluteString)",
             "date": "\(geoSound.date!)",
             "time": "\(geoSound.time!)",
             "description": "\(geoSound.description!)",
@@ -76,8 +77,8 @@ class TZUploadManager{
         
         
         Alamofire.request(Alamofire.Method.POST, json_upload_url, parameters: geoSoundDescription, encoding: Alamofire.ParameterEncoding.JSON)
-            .responseJSON(options: nil) { (request, response, JSON, error) -> Void in
-            println(JSON)
+            .responseJSON{ response in
+            print(response)
             self.dismissLoadingScreen()
             
         }

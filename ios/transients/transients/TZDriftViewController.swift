@@ -15,7 +15,7 @@ class TZDriftViewController: UIViewController, TZUploadManagerDelegate{
     var geoSound : TZGeoSound!
     var geoSoundUploader : TZUploadManager!
     
-    let motionKit = MotionKit()
+   // let motionKit = MotionKit()
     
     let threshold = 0.5
     let interval = 0.1
@@ -41,7 +41,7 @@ override func viewDidLoad(){
     
     textView.text = "Hold phone tightly \n and throw sound \n into the world!"
     
-    textView.font = UIFont(name: textView.font.fontName, size: 32)
+    textView.font = UIFont(name: textView.font!.fontName, size: 32)
     
     textView.backgroundColor = Constants.Colors.backgroundColor
     
@@ -60,8 +60,8 @@ override func viewDidLoad(){
    
     isUploading = false
     
-    
-    motionKit.getAccelerometerValues(interval: self.interval) {(x, y, z) -> () in
+    /*
+    motionKit.getAccelerationValFromDeviceMotion(interval: self.interval) {(x, y, z) -> () in
     
    // println("X: \(x) Y: \(y) Z \(z)")
     var slowedDown = false
@@ -98,6 +98,7 @@ override func viewDidLoad(){
         slowedDown = false
     
     }
+*/
 }
     
     func calculateNewPosition(throwDistance : Double){
@@ -110,7 +111,7 @@ override func viewDidLoad(){
         var newLat = currentLat + latDisplacement
         var newLng = currentLng + lngDisplacement
         
-        println("Distance: \(distance) | Current Lat: \(currentLat) | Current Lng: \(currentLng) | Heading: \(heading) | latDisp: \(latDisplacement) | lngDisp: \(lngDisplacement) | New Lat: \(newLat) | New Lng: \(newLng) ")
+       print("Distance: \(distance) | Current Lat: \(currentLat) | Current Lng: \(currentLng) | Heading: \(heading) | latDisp: \(latDisplacement) | lngDisp: \(lngDisplacement) | New Lat: \(newLat) | New Lng: \(newLng) ")
        
         geoSound.thrownLatitude = newLat
         geoSound.thrownLongitude = newLng
@@ -135,7 +136,7 @@ override func viewDidLoad(){
     //presenting/dismissing protocols
     
     func presentLoadingScreen(){
-        println("presenting loading screen for drift")
+        print("presenting loading screen for drift")
         grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
         grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
         
@@ -155,7 +156,7 @@ override func viewDidLoad(){
     }
     
     func dismissLoadingScreen(){
-        println("dismissing loading screen for drift")
+        print("dismissing loading screen for drift")
         self.activityIndicator!.stopAnimating()
         self.activityIndicator!.removeFromSuperview()
         self.grayView!.removeFromSuperview()

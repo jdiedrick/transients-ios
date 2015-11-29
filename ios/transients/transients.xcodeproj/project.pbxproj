@@ -7,12 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8689DFE0401127FC6435AADB /* Pods_transients.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8689DFE0401127FC6435AADB /* Pods_transients.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */; };
 		8E01BA201B5DAFD400A1774F /* TZDriftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */; };
 		8E3D089B1B993AD300DC68F3 /* TZConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3D089A1B993AD300DC68F3 /* TZConstants.swift */; };
 		8E4435B71B8100CE0035A361 /* TZUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4435B61B8100CE0035A361 /* TZUploadManager.swift */; };
 		8E4435B91B8112580035A361 /* TZGeoSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4435B81B8112580035A361 /* TZGeoSound.swift */; };
 		8E486BCB1B3E467E00CE41A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E486BCA1B3E467E00CE41A4 /* MapKit.framework */; };
+		8E4F97FE1BF19FAC0037DE38 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F97FC1BF19FAC0037DE38 /* Bolts.framework */; };
+		8E4F97FF1BF19FAD0037DE38 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F97FD1BF19FAC0037DE38 /* Parse.framework */; };
+		8E4F98091BF1A00C0037DE38 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98001BF1A00C0037DE38 /* AudioToolbox.framework */; };
+		8E4F980A1BF1A00C0037DE38 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98011BF1A00C0037DE38 /* CFNetwork.framework */; };
+		8E4F980B1BF1A00C0037DE38 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98021BF1A00C0037DE38 /* CoreGraphics.framework */; };
+		8E4F980C1BF1A00C0037DE38 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98031BF1A00C0037DE38 /* CoreLocation.framework */; };
+		8E4F980D1BF1A00C0037DE38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98041BF1A00C0037DE38 /* QuartzCore.framework */; };
+		8E4F980E1BF1A00C0037DE38 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98051BF1A00C0037DE38 /* Security.framework */; };
+		8E4F980F1BF1A00C0037DE38 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98061BF1A00C0037DE38 /* Social.framework */; };
+		8E4F98101BF1A00C0037DE38 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98071BF1A00C0037DE38 /* StoreKit.framework */; };
+		8E4F98111BF1A00C0037DE38 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98081BF1A00C0037DE38 /* SystemConfiguration.framework */; };
+		8E4F98131BF1A0180037DE38 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98121BF1A0180037DE38 /* libsqlite3.dylib */; };
+		8E4F98151BF1A0280037DE38 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4F98141BF1A0280037DE38 /* libz.dylib */; };
+		8E4F98171BF1AA9F0037DE38 /* TZSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4F98161BF1AA9F0037DE38 /* TZSignUpViewController.swift */; };
 		8E566FE61B97C550008E8FFD /* AudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E566FE51B97C550008E8FFD /* AudioHelper.m */; };
 		8E76F1AF1B96A91C00453AA4 /* lame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E76F1AE1B96A91C00453AA4 /* lame.framework */; };
 		8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */; };
@@ -34,6 +48,20 @@
 		8E4435B61B8100CE0035A361 /* TZUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZUploadManager.swift; sourceTree = "<group>"; };
 		8E4435B81B8112580035A361 /* TZGeoSound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZGeoSound.swift; sourceTree = "<group>"; };
 		8E486BCA1B3E467E00CE41A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8E4F97FC1BF19FAC0037DE38 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "libraries/parse-library-1.9.1/Bolts.framework"; sourceTree = "<group>"; };
+		8E4F97FD1BF19FAC0037DE38 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "libraries/parse-library-1.9.1/Parse.framework"; sourceTree = "<group>"; };
+		8E4F98001BF1A00C0037DE38 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		8E4F98011BF1A00C0037DE38 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		8E4F98021BF1A00C0037DE38 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8E4F98031BF1A00C0037DE38 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8E4F98041BF1A00C0037DE38 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8E4F98051BF1A00C0037DE38 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8E4F98061BF1A00C0037DE38 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		8E4F98071BF1A00C0037DE38 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8E4F98081BF1A00C0037DE38 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8E4F98121BF1A0180037DE38 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8E4F98141BF1A0280037DE38 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		8E4F98161BF1AA9F0037DE38 /* TZSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZSignUpViewController.swift; sourceTree = "<group>"; };
 		8E5250C51B9DDD470046025B /* TZGeoSoundTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZGeoSoundTests.swift; sourceTree = "<group>"; };
 		8E566FE41B97C550008E8FFD /* transients-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "transients-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E566FE51B97C550008E8FFD /* AudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHelper.m; sourceTree = "<group>"; };
@@ -53,11 +81,9 @@
 		8ED94E601B54C09E00D4A273 /* TZLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZLocationService.swift; sourceTree = "<group>"; };
 		8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZMapViewController.swift; sourceTree = "<group>"; };
 		B99F7E733E7DC486B8CA4A35 /* Pods_transientsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_transientsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0CE233B00EB081315B561D5 /* Pods-transientsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transientsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-transientsTests/Pods-transientsTests.release.xcconfig"; sourceTree = "<group>"; };
 		E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZSaveViewController.swift; sourceTree = "<group>"; };
 		F1F1F2E4BE99EA7D0F555FA8 /* Pods-transients.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transients.debug.xcconfig"; path = "Pods/Target Support Files/Pods-transients/Pods-transients.debug.xcconfig"; sourceTree = "<group>"; };
 		F22EA1881006184062FB1506 /* Pods-transients.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transients.release.xcconfig"; path = "Pods/Target Support Files/Pods-transients/Pods-transients.release.xcconfig"; sourceTree = "<group>"; };
-		F46E0ACA8D5F8137D6FB3E90 /* Pods-transientsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transientsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-transientsTests/Pods-transientsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +91,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E4F98151BF1A0280037DE38 /* libz.dylib in Frameworks */,
+				8E4F98131BF1A0180037DE38 /* libsqlite3.dylib in Frameworks */,
+				8E4F98091BF1A00C0037DE38 /* AudioToolbox.framework in Frameworks */,
+				8E4F980A1BF1A00C0037DE38 /* CFNetwork.framework in Frameworks */,
+				8E4F980B1BF1A00C0037DE38 /* CoreGraphics.framework in Frameworks */,
+				8E4F980C1BF1A00C0037DE38 /* CoreLocation.framework in Frameworks */,
+				8E4F980D1BF1A00C0037DE38 /* QuartzCore.framework in Frameworks */,
+				8E4F980E1BF1A00C0037DE38 /* Security.framework in Frameworks */,
+				8E4F980F1BF1A00C0037DE38 /* Social.framework in Frameworks */,
+				8E4F98101BF1A00C0037DE38 /* StoreKit.framework in Frameworks */,
+				8E4F98111BF1A00C0037DE38 /* SystemConfiguration.framework in Frameworks */,
 				8E76F1AF1B96A91C00453AA4 /* lame.framework in Frameworks */,
 				8E486BCB1B3E467E00CE41A4 /* MapKit.framework in Frameworks */,
 				8689DFE0401127FC6435AADB /* Pods_transients.framework in Frameworks */,
+				8E4F97FE1BF19FAC0037DE38 /* Bolts.framework in Frameworks */,
+				8E4F97FF1BF19FAD0037DE38 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +116,17 @@
 		2CB6CB170D55CA1433A0A071 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E4F98141BF1A0280037DE38 /* libz.dylib */,
+				8E4F98121BF1A0180037DE38 /* libsqlite3.dylib */,
+				8E4F98001BF1A00C0037DE38 /* AudioToolbox.framework */,
+				8E4F98011BF1A00C0037DE38 /* CFNetwork.framework */,
+				8E4F98021BF1A00C0037DE38 /* CoreGraphics.framework */,
+				8E4F98031BF1A00C0037DE38 /* CoreLocation.framework */,
+				8E4F98041BF1A00C0037DE38 /* QuartzCore.framework */,
+				8E4F98051BF1A00C0037DE38 /* Security.framework */,
+				8E4F98061BF1A00C0037DE38 /* Social.framework */,
+				8E4F98071BF1A00C0037DE38 /* StoreKit.framework */,
+				8E4F98081BF1A00C0037DE38 /* SystemConfiguration.framework */,
 				8E76F1AE1B96A91C00453AA4 /* lame.framework */,
 				8E486BCA1B3E467E00CE41A4 /* MapKit.framework */,
 				7A6BFBC4728ECC33093F2689 /* Pods_transients.framework */,
@@ -89,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */,
+				8E4F98161BF1AA9F0037DE38 /* TZSignUpViewController.swift */,
 				E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */,
 				8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */,
 				8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */,
@@ -118,6 +169,8 @@
 		8ED07CE71B38DAC100C1F950 = {
 			isa = PBXGroup;
 			children = (
+				8E4F97FC1BF19FAC0037DE38 /* Bolts.framework */,
+				8E4F97FD1BF19FAC0037DE38 /* Parse.framework */,
 				8ED07CF21B38DAC100C1F950 /* transients */,
 				8ED07D0B1B38DAC100C1F950 /* transientsTests */,
 				8ED07CF11B38DAC100C1F950 /* Products */,
@@ -184,8 +237,6 @@
 			children = (
 				F1F1F2E4BE99EA7D0F555FA8 /* Pods-transients.debug.xcconfig */,
 				F22EA1881006184062FB1506 /* Pods-transients.release.xcconfig */,
-				F46E0ACA8D5F8137D6FB3E90 /* Pods-transientsTests.debug.xcconfig */,
-				C0CE233B00EB081315B561D5 /* Pods-transientsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -320,6 +371,7 @@
 				8ED07CFB1B38DAC100C1F950 /* TZRecorderViewController.swift in Sources */,
 				8ED3F7E31B40D2C200E26D06 /* TZGeoSoundRecorder.swift in Sources */,
 				8ED07CF91B38DAC100C1F950 /* transients.xcdatamodeld in Sources */,
+				8E4F98171BF1AA9F0037DE38 /* TZSignUpViewController.swift in Sources */,
 				8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */,
 				8E4435B71B8100CE0035A361 /* TZUploadManager.swift in Sources */,
 				8ED3F7E51B40D87700E26D06 /* TZGeoSoundPlayer.swift in Sources */,
@@ -435,12 +487,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mp3lame-for-iOS",
+					"$(PROJECT_DIR)/libraries/parse-library-1.9.1",
 				);
 				INFOPLIST_FILE = transients/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -457,12 +511,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mp3lame-for-iOS",
+					"$(PROJECT_DIR)/libraries/parse-library-1.9.1",
 				);
 				INFOPLIST_FILE = transients/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -60,39 +60,39 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         
         description_box = UITextField()
         description_box?.delegate = self
-        description_box?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        description_box?.translatesAutoresizingMaskIntoConstraints = false
         description_box?.backgroundColor = Constants.Colors.box1Color
         description_box?.textColor = Constants.Colors.text2Color
         description_box?.attributedPlaceholder = NSAttributedString(string:"Describe your transient!",
             attributes:[NSForegroundColorAttributeName: Constants.Colors.text2Color])
 
         drift_label = UILabel()
-        drift_label?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        drift_label?.translatesAutoresizingMaskIntoConstraints = false
         drift_label?.backgroundColor = Constants.Colors.backgroundColor
         drift_label?.textColor = Constants.Colors.textColor
         drift_label?.text = "On = Drift / Off = Anchor"
         
         drift_switch = UISwitch()
         drift_switch?.onTintColor = Constants.Colors.recordingColor
-        drift_switch?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        drift_switch?.translatesAutoresizingMaskIntoConstraints = false
         drift_switch?.setOn(true, animated: false)
 
         upload_button = UIButton()
-        upload_button?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        upload_button?.translatesAutoresizingMaskIntoConstraints = false
         upload_button?.backgroundColor = Constants.Colors.box2Color
         upload_button?.tintColor = Constants.Colors.textColor
         upload_button?.setTitle("Upload", forState: UIControlState.Normal)
         upload_button?.addTarget(self, action: "uploadAudio", forControlEvents: UIControlEvents.TouchUpInside)
 
         preview_button = UIButton()
-        preview_button?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        preview_button?.translatesAutoresizingMaskIntoConstraints = false
         preview_button?.backgroundColor = Constants.Colors.box2Color
         preview_button?.tintColor = Constants.Colors.textColor
         preview_button?.setTitle("Preview", forState: UIControlState.Normal)
         preview_button?.addTarget(self, action: "previewAudio", forControlEvents: UIControlEvents.TouchUpInside)
 
         cancel_button = UIButton()
-        cancel_button?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        cancel_button?.translatesAutoresizingMaskIntoConstraints = false
         cancel_button?.backgroundColor = Constants.Colors.box2Color
         cancel_button?.tintColor = Constants.Colors.textColor
         cancel_button?.setTitle("Cancel", forState: UIControlState.Normal)
@@ -125,8 +125,8 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         let view_constraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-36-[description_box]-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: viewsDictionary)
         let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-100-[description_box]-100-[drift_switch]-[drift_label]-[upload_button]-[preview_button]-[cancel_button]-20-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
         
-        view.addConstraints(view_constraint_H as [AnyObject])
-        view.addConstraints(view_constraint_V as [AnyObject])
+        view.addConstraints(view_constraint_H as! [NSLayoutConstraint])
+        view.addConstraints(view_constraint_V as! [NSLayoutConstraint])
         
     }
    
@@ -152,13 +152,13 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
         geoSound.date = date
         geoSound.time = time
         geoSound.description = description_box!.text
-        geoSound.tags = "yamiichi" // custom tag for yami ichi
+        geoSound.tags = "" // custom tag for yami ichi
         geoSound.isDrifting = false
         geoSound.thrownLatitude = geoSound.latitude
         geoSound.thrownLongitude = geoSound.longitude
     
         if (self.drift_switch!.on){
-            println("lets drift")
+            print("lets drift")
             geoSound.isDrifting = true
             let dvc:TZDriftViewController = TZDriftViewController()
             dvc.geoSound = geoSound
@@ -173,7 +173,12 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     }
     
     func previewAudio(){
-        geoSoundPlayer = TZGeoSoundPlayer(contentsOfURL: file_path, error: nil)
+        do{
+            try geoSoundPlayer = TZGeoSoundPlayer(contentsOfURL: file_path!)
+
+        } catch{
+            print("error previewing audio")
+        }
         geoSoundPlayer?.delegate = self
         geoSoundPlayer?.play()
     }
@@ -198,17 +203,17 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     // audio player delegate methods
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
-        println("audio player finished playing")
+        print("audio player finished playing")
     }
     
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
-        println("audio play decode error")
+        print("audio play decode error")
     }
     
     //presenting/dismissing protocols
     
     func presentLoadingScreen(){
-        println("presenting loading screen")
+        print("presenting loading screen")
         grayView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
         grayView!.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
         
@@ -228,7 +233,7 @@ class TZSaveViewController: UIViewController, UITextFieldDelegate, AVAudioPlayer
     }
     
     func dismissLoadingScreen(){
-        println("dismissing loading screen")
+        print("dismissing loading screen")
         self.activityIndicator!.stopAnimating()
         self.activityIndicator!.removeFromSuperview()
         self.grayView!.removeFromSuperview()

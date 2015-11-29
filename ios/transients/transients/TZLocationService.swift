@@ -29,28 +29,29 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     }
     
     func startUpdatingLocation() {
-        println("Starting Location Updates")
+        print("Starting Location Updates")
         self.locationManager?.requestWhenInUseAuthorization()
         self.locationManager?.startUpdatingLocation()
     }
     
     func stopUpdatingLocation() {
-        println("Stop Location Updates")
+        print("Stop Location Updates")
         self.locationManager?.stopUpdatingLocation()
     }
     
     func startUpdatingHeading(){
-        println("Starting Heading Updates")
+        print("Starting Heading Updates")
         self.locationManager?.startUpdatingHeading()
     }
     
     func stopUpdatingHeading(){
-        println("Stop Heading Updates")
+        print("Stop Heading Updates")
         self.locationManager?.stopUpdatingHeading()
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var location: AnyObject? = (locations as NSArray).lastObject
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        let location: AnyObject? = (locations as NSArray).lastObject
         
         self.currentLocation = location as? CLLocation
         
@@ -61,7 +62,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         if (error != nil) {
-            println("Update Location Error : \(error.description)")
+            print("Update Location Error : \(error.description)")
         }
     }
     
