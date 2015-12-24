@@ -29,6 +29,7 @@
 		8E4F98171BF1AA9F0037DE38 /* TZSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4F98161BF1AA9F0037DE38 /* TZSignUpViewController.swift */; };
 		8E566FE61B97C550008E8FFD /* AudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E566FE51B97C550008E8FFD /* AudioHelper.m */; };
 		8E76F1AF1B96A91C00453AA4 /* lame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E76F1AE1B96A91C00453AA4 /* lame.framework */; };
+		8EA5F2631C2B892D008C7243 /* TZLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5F2621C2B892D008C7243 /* TZLogInViewController.swift */; };
 		8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */; };
 		8ED07CF91B38DAC100C1F950 /* transients.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CF71B38DAC100C1F950 /* transients.xcdatamodeld */; };
 		8ED07CFB1B38DAC100C1F950 /* TZRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */; };
@@ -67,6 +68,7 @@
 		8E566FE51B97C550008E8FFD /* AudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHelper.m; sourceTree = "<group>"; };
 		8E566FE71B97C5EC008E8FFD /* AudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHelper.h; sourceTree = "<group>"; };
 		8E76F1AE1B96A91C00453AA4 /* lame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = lame.framework; path = "mp3lame-for-iOS/lame.framework"; sourceTree = "<group>"; };
+		8EA5F2621C2B892D008C7243 /* TZLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TZLogInViewController.swift; sourceTree = "<group>"; };
 		8ED07CF01B38DAC100C1F950 /* transients.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transients.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED07CF41B38DAC100C1F950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ED07CF51B38DAC100C1F950 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				8ED07CFA1B38DAC100C1F950 /* TZRecorderViewController.swift */,
 				8E4F98161BF1AA9F0037DE38 /* TZSignUpViewController.swift */,
+				8EA5F2621C2B892D008C7243 /* TZLogInViewController.swift */,
 				E1C7C4211B71983F0099A025 /* TZSaveViewController.swift */,
 				8E01BA1F1B5DAFD400A1774F /* TZDriftViewController.swift */,
 				8EE840221B3C78EE0037EC64 /* TZMapViewController.swift */,
@@ -276,7 +279,7 @@
 				TargetAttributes = {
 					8ED07CEF1B38DAC100C1F950 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = R5499R7FQ2;
+						DevelopmentTeam = A9QGCEL6ZB;
 					};
 				};
 			};
@@ -370,6 +373,7 @@
 				8E01BA201B5DAFD400A1774F /* TZDriftViewController.swift in Sources */,
 				8ED07CFB1B38DAC100C1F950 /* TZRecorderViewController.swift in Sources */,
 				8ED3F7E31B40D2C200E26D06 /* TZGeoSoundRecorder.swift in Sources */,
+				8EA5F2631C2B892D008C7243 /* TZLogInViewController.swift in Sources */,
 				8ED07CF91B38DAC100C1F950 /* transients.xcdatamodeld in Sources */,
 				8E4F98171BF1AA9F0037DE38 /* TZSignUpViewController.swift in Sources */,
 				8ED07CF61B38DAC100C1F950 /* AppDelegate.swift in Sources */,

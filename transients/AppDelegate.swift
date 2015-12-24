@@ -23,9 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-        //println("\(UIDevice.currentDevice().identifierForVendor!.UUIDString)")
         
-        let launchedBefore = true
+        let launchedBefore = false
         //= NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
         
         if launchedBefore  {
@@ -74,9 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let window = window{
                 
-                let signUpViewController = TZSignUpViewController()
+                let loginViewController = TZLoginViewController()
                 
-                window.rootViewController = signUpViewController
+                window.rootViewController = loginViewController
                 
                 window.makeKeyAndVisible()
             }
